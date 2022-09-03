@@ -18,7 +18,6 @@ const ProductCardDescription = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid black;
   & > h3 {
     font-size: 14px;
     margin: 0;
