@@ -141,7 +141,6 @@ export const handlers = [
       1,
       body
     );
-    console.log(fruits);
     return res(ctx.status(201));
   }),
 
@@ -152,7 +151,7 @@ export const handlers = [
       fruits.findIndex(item => item.id === Number(id)),
       1
     );
-    console.log(ctx);
+
     return res(ctx.status(200));
   }),
 
