@@ -1,9 +1,9 @@
-function ProductCard({ id, image, isSale, name, price, salePrice }) {
+function ProductCard({ id, img, isSale, name, price, salePrice }) {
   return (
     <div>
       <div>
         {/* 이후에 absolute로 sale, best,md를 추가하기 위해서 div로 감쌌음*/}
-        <img src={image} alt="" />
+        <img src={img} alt="" />
       </div>
       <div className="card-description">
         <div>
