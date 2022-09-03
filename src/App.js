@@ -1,16 +1,18 @@
-import './App.css';
 import { Routes, Route } from 'react-router';
-import TestMocking from './components/TestMocking';
-import AdminPost from './pages/AdminPost'
+import Footer from './components/Footer';
+import Header from './components/Header';
+import { AppContainer } from './styles/reset';
+import AdminPost from './pages/AdminPost';
 
 function App() {
   return (
-    <div className="App">
-      <TestMocking />
+    <AppContainer className="App">
+      <Header />
       <Routes>
-        <Route path='/adminPost' element={<AdminPost/>}/>
+        <Route path='/admin' element={<AdminPost />}/>
       </Routes>
-    </div>
+      <Footer />
+    </AppContainer>
   );
 }
 
