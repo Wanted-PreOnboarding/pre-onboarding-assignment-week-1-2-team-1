@@ -42,9 +42,16 @@
     ]
   },
   "devDependencies": {
+<<<<<<< HEAD
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
     "prettier": "^2.7.1"
+=======
+    "msw": "^0.46.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
+>>>>>>> 4e989da5ed170a37be0ea153bc355ce8f6358a48
   }
 }
