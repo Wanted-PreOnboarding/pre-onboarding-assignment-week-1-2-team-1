@@ -19,17 +19,36 @@ const ProductCardDescription = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid black;
-
   & > h3 {
     font-size: 14px;
     margin: 0;
     margin-top: 12px;
+    height: 32px;
   }
   & > div {
     margin-bottom: 5px;
   }
-  .card-price-delivery {
+`;
+
+const DiscountPercentageSpan = styled.span`
+  font-size: 16px;
+  color: #206b0c;
+  font-weight: bold;
+`;
+const SalePriceSpan = styled.span`
+  font-size: 18px;
+  color: #95366f;
+  font-weight: bold;
+`;
+const PriceAndDelivery = styled.div`
+  display: flex;
+  justify-content: space-between;
+  & span {
     font-size: 10px;
+    color: #929892;
+  }
+  & span:first-of-type {
+    text-decoration: line-through;
   }
 `;
 
@@ -39,27 +58,20 @@ function ProductCard({ id, img, isSale, name, price, salePrice, chip }) {
   return (
     <ProductCardContainer>
       <div>
-        {/* 이후에 absolute로 sale, best,md badge를 추가하기 위해서 div로 감쌌음*/}
-        <img src={img} alt="" />
+        {/* todo: 이후에 absolute로 sale, best,md badge를 추가하기 위해서 div로 감쌌음 */}
+        <img src={img} alt={name} />
       </div>
       <ProductCardDescription>
         <h3>{name}</h3>
         <div>
           <div>
-            {/* discount and sale price */}
-            <span>{discountPercentage}%</span>
-            <span>{salePrice}</span>
+            <DiscountPercentageSpan>{discountPercentage}%</DiscountPercentageSpan>
+            <SalePriceSpan>{salePrice}</SalePriceSpan>
           </div>
-          <div className="card-price-delivery">
-            {/* price and delivery fee */}
+          <PriceAndDelivery>
             <span>{price}</span>
             <span>무료배송</span>
-          </div>
-        </div>
-        <div>
-          {/* price and delivery fee */}
-          <span>{price}</span>
-          <span>무료배송</span>
+          </PriceAndDelivery>
         </div>
       </ProductCardDescription>
     </ProductCardContainer>
