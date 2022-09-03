@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 
 import { Roboto, Color } from '../../styles/common';
@@ -8,7 +8,8 @@ import axios from 'axios';
 import styled from '@emotion/styled';
 
 function Detail() {
-  const [fruit, setFruit] = React.useState(null);
+  const [fruit, setFruit] = useState(null);
+  const [volume, setVolume] = useState(1);
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -20,6 +21,12 @@ function Detail() {
     navigate(`/fruit/${id}/payment`, {
       state: { fruit },
     });
+  };
+
+  const onMinusVolume = () => {
+    if (volume > 1) {
+      setVolume(volume - 1);
+    }
   };
 
   useEffect(() => {
@@ -61,7 +68,11 @@ function Detail() {
             </ProductOption>
             <ProductOption>
               <span>수량</span>
-              <ProductVolume />
+              <ProductVolume>
+                <button onClick={onMinusVolume}>-</button>
+                <div>{volume}</div>
+                <button onClick={() => setVolume(prev => prev + 1)}>+</button>
+              </ProductVolume>
             </ProductOption>
             <TotalPrice>
               <span>총 상품금액:</span>
@@ -174,9 +185,24 @@ const ProductOption = styled.div`
 `;
 
 const ProductVolume = styled.div`
+  display: flex;
   width: 71.18px;
   height: 29px;
-  background-color: blue;
+
+  button {
+    background-color: transparent;
+    border: 1px solid ${Color.GY200};
+    ${Roboto(1.2, 600, Color.GY200)}
+    line-height: 5px;
+  }
+  div {
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid ${Color.GY200};
+    border-bottom: 1px solid ${Color.GY200};
+    ${Roboto(1.4, 600, 'dark')}
+    line-height: 29px;
+  }
 `;
 
 const TotalPrice = styled.div`
