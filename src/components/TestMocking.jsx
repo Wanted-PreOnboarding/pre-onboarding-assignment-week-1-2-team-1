@@ -15,7 +15,6 @@ function TestMocking() {
     }).then(res => res.json());
     // .then(res => console.log(res));
     // const data = await axios.post(url, JSON.stringify(userData));
-    console.log('pre-commit-test');
   };
 
   return (

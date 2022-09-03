@@ -1,11 +1,14 @@
-import './App.css';
-import TestMocking from './components/TestMocking';
-
+import { Routes } from 'react-router';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import { AppContainer } from './styles/reset';
 function App() {
   return (
-    <div className="App">
-      <TestMocking />
-    </div>
+    <AppContainer className="App">
+      <Header />
+      <Routes></Routes>
+      <Footer />
+    </AppContainer>
   );
 }
 
