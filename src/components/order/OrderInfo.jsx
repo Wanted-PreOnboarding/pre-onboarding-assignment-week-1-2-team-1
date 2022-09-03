@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Color, Roboto } from '../styles/common';
+import { Color, Roboto } from '../../styles/common';
 import priceSetting from '../../utils/priceSetting';
 
 const OrderInfo = () => {
@@ -20,11 +20,11 @@ const OrderInfo = () => {
         />
         <ProductName className="product-name">
           <h1>목감기에 좋은 건더기 없는 프리미엄 수제 착즙 유자청</h1>
-          <p>
+          <Flex>
             <Chip>필수 선택</Chip> <span>유자청 480g(960g)/2개</span>
-          </p>
+          </Flex>
         </ProductName>
-        <span>3500원</span>
+        <span className="shipping">3500원</span>
         <span>2개</span>
         <Price>
           <h1>{priceSetting(30100)}원</h1>
@@ -37,30 +37,49 @@ const OrderInfo = () => {
   );
 };
 
-export default OrderInfo;
+export default React.memo(OrderInfo);
 
 const OrderInfoContainer = styled.div`
   margin-bottom: 57px;
+  margin-top: 57px;
+
   & ul {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
     margin: 0;
-    padding: 26px 53px;
+    padding: 26px 0 26px 53px;
 
     & li {
+      display: inline;
+
+      &:not(:first-of-type) {
+        text-align: center;
+      }
+
       ${Roboto(1.6, 600, Color.GR400)};
       line-height: 19px;
+      flex: 1;
+      &:nth-of-type(2) {
+        flex: 2.9;
+      }
+      &:last-child {
+        flex: 2;
+      }
     }
   }
 `;
 
 const ProductName = styled.div`
+  width: 425px;
   & h1 {
     ${Roboto(1.6, 600, '#000')};
+    margin: 0;
   }
 
   & p {
+    display: flex;
+    align-items: center;
     margin: 0;
   }
   & span {
@@ -72,16 +91,29 @@ const ProductName = styled.div`
 const MyOrderHistoryContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
 
   & img {
     width: 180px;
     height: 180px;
   }
+
+  & span:not(:last-child) {
+    display: block;
+    width: 140px;
+  }
+  & .shipping {
+    padding-left: 10px;
+  }
 `;
 
 const Chip = styled.div`
   background-color: ${Color.GR400};
+  height: 18px;
+  padding: 3px 2px;
   ${Roboto(1, 600, '#fff')};
+  color: #fff !important;
   display: flex;
   align-items: center;
   text-align: center;
@@ -89,6 +121,7 @@ const Chip = styled.div`
 `;
 
 const Price = styled.div`
+  width: 200px;
   & h1 {
     ${Roboto(2.8, 600, Color.RD100)};
     line-height: 33px;
@@ -98,4 +131,8 @@ const Price = styled.div`
     ${Roboto(1.6, 600, Color.GY200)};
     line-height: 19px;
   }
+`;
+
+const Flex = styled.div`
+  display: flex;
 `;
