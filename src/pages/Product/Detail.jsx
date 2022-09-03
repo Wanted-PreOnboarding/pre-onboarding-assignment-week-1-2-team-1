@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 
 import { Roboto, Color } from '../../styles/common';
 import priceSetting from '../../utils/priceSetting';
@@ -9,11 +9,17 @@ import styled from '@emotion/styled';
 
 function Detail() {
   const [fruit, setFruit] = React.useState(null);
-  //const [view, setView] = React.useState('detail');
+  const navigate = useNavigate();
 
   const { id } = useParams();
   const getFruitDetail = async () => {
     axios.get('/fruit', { params: { id } }).then(res => setFruit(res.data.data));
+  };
+
+  const onBuyProduct = () => {
+    navigate(`/fruit/${id}/payment`, {
+      state: { fruit },
+    });
   };
 
   useEffect(() => {
@@ -61,7 +67,7 @@ function Detail() {
               <span>총 상품금액:</span>
               <span>58,000원</span>
             </TotalPrice>
-            <BuyButton>구매하기</BuyButton>
+            <BuyButton onClick={onBuyProduct}>구매하기</BuyButton>
           </BuyComponents>
         </InfoComponents>
       )}
