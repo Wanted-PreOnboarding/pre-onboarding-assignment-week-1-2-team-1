@@ -7,13 +7,13 @@ function List() {
   const [productItems, setproductItems] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProducItems = async () => {
       const { data } = await axios.get(`getfruits?page=1`);
       const { returnPageData } = data;
       setproductItems(returnPageData);
     };
 
-    fetchData();
+    fetchProducItems();
   }, []);
 
   return (
