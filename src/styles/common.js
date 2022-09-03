@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 export const Color = {
   GR100: '#eef8ec',
   GR200: '#84be74',
