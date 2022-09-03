@@ -54,22 +54,23 @@ const ProductCardContainer = styled.section`
     margin-bottom: 28px;
   }
 `;
+const Pagination = styled.div``;
 
 function List() {
   const [productItems, setproductItems] = useState([]);
-  //todo pagination state로 관리 해야함.
+  const [pagination, setPagination] = useState(1);
 
   const chipsMenus = ['Sale', 'Best', 'MD', '전체'];
 
   useEffect(() => {
     const fetchProducItems = async () => {
-      const { data } = await axios.get(`getfruits?page=1`);
+      const { data } = await axios.get(`getfruits?page=${pagination}`);
       const { returnPageData } = data;
       setproductItems(returnPageData);
     };
 
     fetchProducItems();
-  }, []);
+  }, [pagination]);
 
   return (
     <ListContainer>
@@ -101,6 +102,7 @@ function List() {
           />
         ))}
       </ProductCardContainer>
+      <Pagination></Pagination>
     </ListContainer>
   );
 }
