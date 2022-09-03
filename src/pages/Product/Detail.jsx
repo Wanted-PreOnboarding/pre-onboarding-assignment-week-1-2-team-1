@@ -19,7 +19,7 @@ function Detail() {
 
   const onBuyProduct = () => {
     navigate(`/fruit/${id}/payment`, {
-      state: { fruit },
+      state: { fruit, volume },
     });
   };
 
