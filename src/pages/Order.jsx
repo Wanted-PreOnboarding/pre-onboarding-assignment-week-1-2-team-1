@@ -36,6 +36,7 @@ const Order = () => {
       document.getElementById('연락처').value = '';
       setRecipientPhoneNumber('');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isChecked]);
 
   const paymentHandler = () => {
