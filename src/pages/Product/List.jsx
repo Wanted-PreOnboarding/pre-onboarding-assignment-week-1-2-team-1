@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+import ProductCard from '../../components/ProductCard';
 
 function List() {
   const [productItems, setproductItems] = useState([]);
 
-  console.log(productItems);
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get(`getfruits?page=1`);
@@ -30,9 +30,17 @@ function List() {
           }
         </ul>
         <div>
-          {
-            //상품 나열 -> ProducCard를 통해서
-          }
+          {productItems.map(({ id, img, isSale, name, price, salePrice }) => (
+            <ProductCard
+              key={id}
+              id={id}
+              img={img}
+              isSale={isSale}
+              name={name}
+              price={price}
+              salePrice={salePrice}
+            />
+          ))}
         </div>
       </main>
     </div>
