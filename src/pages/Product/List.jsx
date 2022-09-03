@@ -54,23 +54,40 @@ const ProductCardContainer = styled.section`
     margin-bottom: 28px;
   }
 `;
-const Pagination = styled.div``;
+const Pagination = styled.div`
+  & span {
+    margin: 4px;
+  }
+`;
 
 function List() {
   const [productItems, setproductItems] = useState([]);
   const [pagination, setPagination] = useState(1);
 
   const chipsMenus = ['Sale', 'Best', 'MD', '전체'];
+  //todo : 더미 데이터임. 나중에는 최초로 서버에서 메타데이터를 받아 page의 개수만큼 페이지네이션이 가능하도록 구현.
+  const pages = [1, 2, 3, 4];
 
+  //todo : 만약 페이지가 없을 경우에 대한 에러 핸들링도 필요로 함
   useEffect(() => {
     const fetchProducItems = async () => {
-      const { data } = await axios.get(`getfruits?page=${pagination}`);
-      const { returnPageData } = data;
-      setproductItems(returnPageData);
+      try {
+        const { data } = await axios.get(`getfruits?page=${pagination}`);
+        const { returnPageData } = data;
+        if (!returnPageData) throw new Error('서버로부터의 데이터가 없습니다.');
+        setproductItems(returnPageData);
+      } catch (err) {
+        console.error(err);
+        setproductItems([]);
+      }
     };
 
     fetchProducItems();
   }, [pagination]);
+
+  const onClickPage = e => {
+    setPagination(parseInt(e.target.textContent, 10));
+  };
 
   return (
     <ListContainer>
@@ -102,7 +119,13 @@ function List() {
           />
         ))}
       </ProductCardContainer>
-      <Pagination></Pagination>
+      <Pagination>
+        {pages.map((page, idx) => (
+          <span key={idx} onClick={onClickPage}>
+            {page}
+          </span>
+        ))}
+      </Pagination>
     </ListContainer>
   );
 }
