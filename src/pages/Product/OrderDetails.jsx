@@ -5,27 +5,34 @@ import OrderDetailsInfo from '../../components/orderDetails/OrderDetailsInfo';
 import { Color, Roboto } from '../../styles/common';
 import FinalPaymentSummary from '../../components/orderDetails/FinalPaymentSummary';
 import { orderNum } from '../../utils/OrderNums';
+import { useMemo } from 'react';
+import { useLocation } from 'react-router';
 
-const OrderDetails = ({
-  name,
-  phoneNumber,
-  email,
-  recipient,
-  recipientPhoneNumber,
-  zipCode,
-  address,
-  detailedAddress,
-  isChecked,
-}) => {
+const OrderDetails = () => {
+  const { state } = useLocation();
+  const {
+    fruit,
+    volume,
+    name,
+    phoneNumber,
+    email,
+    recipient,
+    recipientPhoneNumber,
+    zipCode,
+    address,
+    detailedAddress,
+    isChecked,
+  } = state;
+
   const [toggle, setToggle] = useState(false);
-  const { orderTime, orderNumber } = orderNum();
+  const { orderTime, orderNumber } = useMemo(() => orderNum(), []);
 
   return (
     <OrderPage>
       <h1 style={{ paddingTop: '30px' }}>주문 상세 내역</h1>
       {name ? (
         <>
-          <OrderDetailsInfo />
+          <OrderDetailsInfo fruit={fruit} volume={volume} />
           <ShowDetails>
             <OrderNum>
               <b>주문번호: </b>
@@ -77,7 +84,7 @@ const OrderDetails = ({
                   </InpuForm>
                 </article>
               </BuyerInfoContainer>
-              <FinalPaymentSummary />
+              <FinalPaymentSummary fruit={fruit} volume={volume} />
               <hr />
             </>
           )}
@@ -87,19 +94,6 @@ const OrderDetails = ({
       )}
     </OrderPage>
   );
-};
-
-// 임의로 넣은 props 기본값입니다.
-OrderDetails.defaultProps = {
-  name: '김뚝딱',
-  phoneNumber: '010-1111-111',
-  email: '',
-  recipient: '김뚝딱씨',
-  recipientPhoneNumber: '010-1111-1112',
-  zipCode: '11240',
-  address: '서울시',
-  detailedAddress: '11동 3호',
-  isChecked: true,
 };
 
 export default OrderDetails;

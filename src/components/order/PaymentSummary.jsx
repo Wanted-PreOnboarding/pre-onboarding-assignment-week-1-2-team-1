@@ -13,18 +13,21 @@ export const PaymentPrice = ({ title, price, emphasis }) => {
   );
 };
 
-function PaymentSummary() {
+function PaymentSummary({ fruit, volume }) {
   return (
     <Summary>
       <h1>결제요약</h1>
       <div className="container">
-        <PaymentPrice title="총 상품금액" price={30000} />
+        <PaymentPrice title="총 상품금액" price={fruit.price * volume} />
         <Operator>+</Operator>
-        <PaymentPrice title="총 할인금액" price={3400} />
+        <PaymentPrice title="총 할인금액" price={(fruit.price - fruit.salePrice) * volume} />
         <Operator>-</Operator>
-        <PaymentPrice title="배송비" price={3500} />
+        <PaymentPrice title="배송비" price={fruit.shippingPrice} />
         <Operator>=</Operator>
-        <PaymentPrice title="총 결제 예정금액" price={30100} />
+        <PaymentPrice
+          title="총 결제 예정금액"
+          price={fruit.salePrice * volume + fruit.shippingPrice}
+        />
       </div>
     </Summary>
   );
