@@ -63,13 +63,16 @@ const Pagination = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  & span {
-    margin: 4px;
-    cursor: pointer;
-  }
   & svg {
     cursor: pointer;
+    color: ${({ test }) => {}};
   }
+`;
+const PaginationButton = styled.span`
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: ${({ isSelected }) => (isSelected ? 'bold' : 'normal')};
+  color: ${({ isSelected }) => isSelected && '#206B0C'};
 `;
 
 function List() {
@@ -104,7 +107,11 @@ function List() {
   };
   const pageSpans = [];
   for (let i = 0; i < pagination; i++) {
-    pageSpans.push(<span onClick={onClickPage}>{i + 1}</span>);
+    pageSpans.push(
+      <PaginationButton isSelected={onPage === i + 1} onClick={onClickPage}>
+        {i + 1}
+      </PaginationButton>
+    );
   }
 
   const onClickPrevPage = () => {
@@ -146,3 +153,4 @@ function List() {
 }
 
 export default List;
+//todo : prev로 더이상 갈 수 없을 경우 아이콘을 흐리게 하는 효과 추가하기
