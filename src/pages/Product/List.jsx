@@ -70,11 +70,11 @@ const Pagination = styled.div`
 
 const StyledPrev = styled(MdNavigateBefore)`
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  color: ${({ disabled }) => (disabled ? '#929892' : 'black')};
+  visibility: ${({ disabled }) => (disabled ? 'hidden' : 'visible')};
 `;
 const StyledNext = styled(MdNavigateNext)`
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  color: ${({ disabled }) => (disabled ? '#929892' : 'black')};
+  display: ${({ disabled }) => (disabled ? 'none' : 'block')};
 `;
 
 const PaginationButton = styled.span`
