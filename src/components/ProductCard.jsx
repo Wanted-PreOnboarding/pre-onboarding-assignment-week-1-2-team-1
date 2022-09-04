@@ -89,7 +89,7 @@ function ProductCard({ productItem }) {
   return (
     <ProductCardContainer>
       <ImageWrapperLink to={url}>
-        <div>{chip.length > 0 && chip.map(c => <Chip chip={c} />)}</div>
+        <div>{chip.length > 0 && chip.map(c => <Chip key={c} chip={c} />)}</div>
         <img src={img} alt={name} />
       </ImageWrapperLink>
       <ProductCardDescription>
