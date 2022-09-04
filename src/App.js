@@ -14,6 +14,7 @@ function App() {
     <AppContainer className="App">
       <Header />
       <Routes>
+        <Route path="/" element={<List />} />
         <Route path="/fruit/:id" element={<Detail />} />
         <Route path="/fruit/:id/payment" element={<Order />} />
         <Route path="/fruit/:id/payment/detail" element={<OrderDetails />} />

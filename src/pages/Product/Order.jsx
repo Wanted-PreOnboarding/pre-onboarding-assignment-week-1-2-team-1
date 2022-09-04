@@ -5,8 +5,10 @@ import OrderInput from '../../components/order/OrderInput';
 import PaymentSummary from '../../components/order/PaymentSummary';
 import priceSetting from '../../utils/priceSetting';
 import { Color, Roboto } from '../../styles/common';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 const Order = () => {
+  const { id } = useParams();
+
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
@@ -18,7 +20,7 @@ const Order = () => {
   const [isChecked, setIsChecked] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { fruit, volume, id } = location.state;
+  const { fruit, volume } = location.state;
 
   const hasSippingPrice = () => {
     const fruitData = { ...fruit };
@@ -72,7 +74,20 @@ const Order = () => {
     `);
 
     navigate(`/fruit/${id}/payment/detail`, {
-      state: { fruit, volume, id },
+      state: {
+        fruit,
+        volume,
+        name,
+        phoneNumber,
+        email,
+        recipient,
+        recipientPhoneNumber,
+        zipCode,
+        address,
+        detailedAddress,
+        isChecked,
+        id,
+      },
     });
   };
 
