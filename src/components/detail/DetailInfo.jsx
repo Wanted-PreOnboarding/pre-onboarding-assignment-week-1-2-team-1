@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
+import Chip from '../Chip';
 import priceSetting from '../../utils/priceSetting';
 import { Roboto, Color } from '../../styles/common';
 
@@ -30,7 +31,11 @@ function DetailInfo({ fruit, id }) {
         <img src={fruit.img} width="610px" alt="과일 사진" />
       </div>
       <BuyComponents>
-        <Chip />
+        <ChipContainer>
+          {fruit.chip.map(chip => (
+            <Chip chip={chip} />
+          ))}
+        </ChipContainer>
         <ProductTitle>
           <div>{fruit.name}</div>
           <FaShareAlt color={Color.GR400} size="30px" />
@@ -83,10 +88,8 @@ const BuyComponents = styled.div`
   margin-left: 21px;
 `;
 
-const Chip = styled.div`
-  width: 120px;
-  height: 18px;
-  background-color: red;
+const ChipContainer = styled.div`
+  display: flex;
 `;
 
 const ProductTitle = styled.div`
