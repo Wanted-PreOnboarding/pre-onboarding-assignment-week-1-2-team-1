@@ -91,7 +91,7 @@ function DetailInfo({ fruit, id }) {
 
 export default DetailInfo;
 
-const InfoComponents = styled.div`
+const InfoComponents = styled.section`
   display: flex;
   @media screen and (max-width: 1240px) {
     width: 36.063rem;

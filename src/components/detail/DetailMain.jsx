@@ -27,16 +27,18 @@ function DetailMain() {
 
 export default DetailMain;
 
-const Container = styled.div`
+const Container = styled.section`
   @media screen and (max-width: 1240px) {
     width: 36.063rem;
-    margin-left: 21px;
   }
 `;
 
 const ViewMenu = styled.div`
   display: flex;
   margin-top: 150px;
+  @media screen and (max-width: 1240px) {
+    margin-left: 21px;
+  }
 `;
 
 const ViewMenuButton = styled.a`
@@ -64,7 +66,7 @@ const DetailImg = styled.img`
 
   @media screen and (max-width: 1240px) {
     width: 36.063rem;
-    margin: 30px 0;
+    margin: 30px 21px;
   }
 `;
 

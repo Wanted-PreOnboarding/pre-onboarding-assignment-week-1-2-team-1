@@ -31,4 +31,9 @@ export default Detail;
 
 const Continer = styled.div`
   margin: 64px 100px 150px 100px;
+  @media screen and (max-width: 1440px) {
+    section {
+      margin: auto;
+    }
+  }
 `;
