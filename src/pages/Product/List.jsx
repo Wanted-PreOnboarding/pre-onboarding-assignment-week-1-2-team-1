@@ -51,6 +51,7 @@ const ChipMenu = styled.section`
 const ChipMenuButton = styled.span`
   color: ${({ selected }) => (selected ? '#206B0C' : '#000000')};
   font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
+  cursor: pointer;
 `;
 const ProductCardContainer = styled.section`
   display: flex;
@@ -165,9 +166,9 @@ function List() {
         ))}
       </ProductCardContainer>
       <Pagination>
-        <StyledPrev onClick={onClickPrevPage} disabled={onPage < pagination} />
+        <StyledPrev onClick={onClickPrevPage} disabled={onPage < pagination || pagination === 1} />
         {pageSpans}
-        <StyledNext onClick={onClickNextPage} disabled={onPage > 1} />
+        <StyledNext onClick={onClickNextPage} disabled={onPage > 1 || pagination === 1} />
       </Pagination>
     </ListContainer>
   );
