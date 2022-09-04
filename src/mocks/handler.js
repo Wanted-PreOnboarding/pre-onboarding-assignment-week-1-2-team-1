@@ -1,5 +1,4 @@
 import { fruits } from './db';
-
 import { rest } from 'msw';
 
 export const handlers = [
@@ -22,6 +21,7 @@ export const handlers = [
     });
 
     const result = [];
+
     for (let i = 0; i < filteredFruits.length; i += perPage) {
       result.push(filteredFruits.slice(i, i + perPage));
     }
@@ -33,6 +33,16 @@ export const handlers = [
       ctx.json({
         meta,
         returnPageData,
+      })
+    );
+  }),
+
+  // 모든 상품 조회
+  rest.get('/getallfruits', async (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        fruits,
       })
     );
   }),
