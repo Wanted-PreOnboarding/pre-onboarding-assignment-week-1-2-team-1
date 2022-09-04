@@ -156,7 +156,7 @@ export const handlers = [
 
     const fruitsCopy = fruits.slice(0);
     const filteredFruits = fruitsCopy.filter(fruit => {
-      if (!chip) return true;
+      if (chip === 'ALL') return true;
 
       if (fruit.chip.includes(chip)) {
         return true;

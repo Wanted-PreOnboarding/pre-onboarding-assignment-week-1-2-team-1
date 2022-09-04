@@ -90,7 +90,7 @@ function List() {
   const [onPage, setOnPage] = useState(1);
   const [onChip, setOnChip] = useState('SALE');
 
-  const chipsMenus = ['SALE', 'BEST', 'MD', '전체'];
+  const chipsMenus = ['SALE', 'BEST', 'MD', 'ALL'];
 
   useEffect(() => {
     const fetchProducItems = async () => {
@@ -110,7 +110,7 @@ function List() {
     };
 
     fetchProducItems();
-  }, [onPage]);
+  }, [onPage, onChip]);
 
   const onClickPage = e => {
     setOnPage(parseInt(e.target.textContent, 10));
@@ -123,7 +123,9 @@ function List() {
       </PaginationButton>
     );
   }
-
+  const createHandleClickChipMenu = chip => () => {
+    setOnChip(chip);
+  };
   const onClickPrevPage = () => {
     setOnPage(prevPage => (prevPage > 1 ? prevPage - 1 : prevPage));
   };
@@ -145,7 +147,9 @@ function List() {
       </Introduction>
       <ChipMenu>
         {chipsMenus.map((chipMenu, idx) => (
-          <span key={idx}>{chipMenu}</span>
+          <span key={idx} onClick={createHandleClickChipMenu(chipMenu)}>
+            {chipMenu}
+          </span>
         ))}
       </ChipMenu>
       <ProductCardContainer>
