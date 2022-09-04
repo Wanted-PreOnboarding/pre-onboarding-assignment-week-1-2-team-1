@@ -64,17 +64,16 @@ const Pagination = styled.div`
   justify-content: center;
   align-items: center;
   & svg {
+    cursor: pointer;
     font-size: 1.5rem;
   }
 `;
 
 const StyledPrev = styled(MdNavigateBefore)`
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   visibility: ${({ disabled }) => (disabled ? 'hidden' : 'visible')};
 `;
 const StyledNext = styled(MdNavigateNext)`
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  display: ${({ disabled }) => (disabled ? 'none' : 'block')};
+  visibility: ${({ disabled }) => (disabled ? 'hidden' : 'visible')};
 `;
 
 const PaginationButton = styled.span`
