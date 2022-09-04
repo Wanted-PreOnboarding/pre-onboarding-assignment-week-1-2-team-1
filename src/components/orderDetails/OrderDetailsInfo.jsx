@@ -42,7 +42,6 @@ export default React.memo(OrderInfo);
 
 const OrderInfoContainer = styled.div`
   margin-bottom: 57px;
-  margin-top: 57px;
 
   & ul {
     list-style-type: none;
@@ -67,7 +66,7 @@ const OrderInfoContainer = styled.div`
       }
       &:nth-of-type(3) {
         flex: 1.3;
-        padding-right: 2%;
+        padding-right: 2.5%;
       }
       &:last-child {
         flex: 1.2;
@@ -77,7 +76,7 @@ const OrderInfoContainer = styled.div`
 `;
 
 const ProductName = styled.div`
-  width: 475px;
+  width: 400px;
   & h1 {
     ${Roboto(1.6, 600, '#000')};
     margin: 0;
@@ -96,13 +95,13 @@ const ProductName = styled.div`
 
 const Amount = styled.div`
   ${Roboto(1.6, 400, '#000')};
-  width: 220px;
+  width: 180px;
   text-align: center;
 `;
 
 const OrderStatus = styled.div`
   ${Roboto(1.5, 600, '#000')};
-  width: 150px;
+  width: 130px;
   text-align: center;
 
   & button {

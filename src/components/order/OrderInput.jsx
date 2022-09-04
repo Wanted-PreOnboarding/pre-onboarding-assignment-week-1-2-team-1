@@ -2,7 +2,7 @@ import React from 'react';
 import { Color, Roboto } from '../../styles/common';
 import styled from '@emotion/styled';
 
-const OrderInput = ({ name, setValue, placeHolder, isWidthPercent }) => {
+const OrderInput = ({ name, setValue, placeHolder, isWidthPercent, value, disabled }) => {
   const InputContianer = styled.div`
     box-sizing: border-box;
     width: ${isWidthPercent ? '100%' : '231px'};
@@ -29,7 +29,14 @@ const OrderInput = ({ name, setValue, placeHolder, isWidthPercent }) => {
   return (
     <InputContianer>
       <label htmlFor={name}>{name}</label>
-      <input type="text" onChange={onChangeHandler} placeholder={placeHolder} id={name} />
+      <input
+        type="text"
+        onChange={onChangeHandler}
+        placeholder={placeHolder}
+        id={name}
+        value={value}
+        disabled={disabled}
+      />
     </InputContianer>
   );
 };

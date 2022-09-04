@@ -3,7 +3,7 @@ import { Color, Roboto } from '../../styles/common';
 import styled from '@emotion/styled';
 import priceSetting from '../../utils/priceSetting';
 
-const PaymentPrice = ({ title, price }) => {
+export const PaymentPrice = ({ title, price }) => {
   return (
     <PriceChip>
       <span className="title">{title}</span>
@@ -45,7 +45,7 @@ const PriceChip = styled.div`
   }
 `;
 
-const Summary = styled.section`
+export const Summary = styled.section`
   width: 100%;
   margin-bottom: 57px;
   & h1 {
@@ -59,7 +59,7 @@ const Summary = styled.section`
     padding: 35px 70px;
   }
 `;
-const Operator = styled.span`
+export const Operator = styled.span`
   display: inline;
   ${Roboto(2, 600, '#000')};
   line-height: 23px;
