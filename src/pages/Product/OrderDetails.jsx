@@ -1,12 +1,12 @@
 import React from 'react';
-import OrderInfo from '../../components/order/OrderInfo';
 import OrderInput from '../../components/order/OrderInput';
 import PaymentSummary from '../../components/order/PaymentSummary';
+import OrderDetailsInfo from '../../components/orderDetails/OrderDetailsInfo';
 
 const OrderDetails = () => {
   return (
     <>
-      <OrderInfo />
+      <OrderDetailsInfo />
       <div>
         <article>
           <h2>주문자 정보</h2>
