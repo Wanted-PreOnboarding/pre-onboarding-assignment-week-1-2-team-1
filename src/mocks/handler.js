@@ -8,7 +8,9 @@ const fruits = [
     price: 36000,
     salePrice: 29000,
     isSale: true,
+    salePercent: 10,
     chip: 'best',
+    isVisible: true,
   },
   {
     id: 2,
@@ -18,6 +20,7 @@ const fruits = [
     salePrice: 52000,
     isSale: true,
     chip: 'best',
+    isVisible: true,
   },
   {
     id: 3,
@@ -27,6 +30,7 @@ const fruits = [
     salePrice: 30000,
     isSale: true,
     chip: 'best',
+    isVisible: true,
   },
   {
     id: 4,
@@ -36,6 +40,7 @@ const fruits = [
     salePrice: 13300,
     isSale: true,
     chip: 'best',
+    isVisible: true,
   },
   {
     id: 5,
@@ -45,6 +50,7 @@ const fruits = [
     salePrice: 57000,
     isSale: true,
     chip: 'best',
+    isVisible: true,
   },
   {
     id: 6,
@@ -54,6 +60,7 @@ const fruits = [
     salePrice: 29000,
     isSale: true,
     chip: 'best',
+    isVisible: true,
   },
   {
     id: 7,
@@ -63,6 +70,7 @@ const fruits = [
     salePrice: 22500,
     isSale: true,
     chip: 'best',
+    isVisible: true,
   },
   {
     id: 8,
@@ -72,6 +80,7 @@ const fruits = [
     salePrice: 25000,
     isSale: true,
     chip: 'best',
+    isVisible: true,
   },
   {
     id: 9,
@@ -81,6 +90,7 @@ const fruits = [
     salePrice: 12500,
     isSale: true,
     chip: 'best',
+    isVisible: true,
   },
   {
     id: 10,
@@ -90,6 +100,7 @@ const fruits = [
     salePrice: 19000,
     isSale: true,
     chip: 'best',
+    isVisible: false,
   },
   {
     id: 11,
@@ -99,6 +110,7 @@ const fruits = [
     salePrice: 25000,
     isSale: true,
     chip: 'best',
+    isVisible: true,
   },
 ];
 
@@ -109,14 +121,24 @@ export const handlers = [
     const page = req.url.searchParams.get('page');
 
     const result = [];
-    for (let i = 0; i < fruits.length; i += 30) {
-      result.push(fruits.slice(i, i + 30));
+    for (let i = 0; i < fruits.length; i += 10) {
+      result.push(fruits.slice(i, i + 10));
     }
     const returnPageData = result[Number(page) - 1];
     return res(
       ctx.status(200),
       ctx.json({
         returnPageData,
+      })
+    );
+  }),
+
+  // 모든 상품 조회
+  rest.get('/getallfruits', async (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        fruits,
       })
     );
   }),
