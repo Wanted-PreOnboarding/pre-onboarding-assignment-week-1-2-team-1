@@ -2,8 +2,10 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 import Chip from './Chip';
+import setPrice from '../../utils/priceSetting';
 
 //todo: 리팩토링 과정을 통해서 style로 컴포넌트 옮기기
+//todo: 서버측에서 사용되지 않는 데이터를 제거하면 좋을 듯
 const ProductCardContainer = styled.div`
   width: 240px;
   height: 334px;
@@ -65,6 +67,7 @@ const DiscountPercentageSpan = styled.span`
   font-size: 16px;
   color: #206b0c;
   font-weight: bold;
+  margin-right: 4px;
 `;
 const SalePriceSpan = styled.span`
   font-size: 18px;
@@ -107,10 +110,10 @@ function ProductCard({ productItem }) {
         <div>
           <div>
             <DiscountPercentageSpan>{discountPercentage}%</DiscountPercentageSpan>
-            <SalePriceSpan>{salePrice}</SalePriceSpan>
+            <SalePriceSpan>{setPrice(salePrice)}</SalePriceSpan>
           </div>
           <PriceAndDelivery>
-            <span>{price}</span>
+            <span>{setPrice(price)}</span>
             <span>{shippingFlag === 0 ? '무료배송' : `배송료 ${shippingPrice}`}</span>
           </PriceAndDelivery>
         </div>
