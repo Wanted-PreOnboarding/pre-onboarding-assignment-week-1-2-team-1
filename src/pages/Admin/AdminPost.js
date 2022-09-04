@@ -2,12 +2,10 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { Color, Roboto } from '../../styles/common';
-// import axios from 'axios';
-import Modal from './AdminModal';
-import AdminItemList from './AdminItemList';
+import AdminModal from './AdminModal';
 
 function AdminPost() {
-  // eslint-disable-next-line no-unused-vars
+  /* eslint-disable */
   // 등록 모달
   const [modal, setModal] = useState(false);
   const onModal = () => {
@@ -18,9 +16,7 @@ function AdminPost() {
       <p>스토어 상품 목록 등록 페이지</p>
       <Link to='/admin/manage'> 상품 수정 바로 가기 → </Link>
 
-      { modal === true ? <Modal /> : null}
-
-      <AdminItemList />
+      {modal === true ? <AdminModal /> : null}
 
       <button onClick={onModal} className='modal-btn'>상품 등록하기</button>
     </AdminPostContainer>

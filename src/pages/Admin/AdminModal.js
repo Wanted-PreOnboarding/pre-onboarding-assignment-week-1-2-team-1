@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import { Color, Roboto } from '../../styles/common';
+import axios from 'axios';
 
 function AdminModal() {
+  /* eslint-disable */
   // 이미지 입력
   const [image, setImage] = useState('');
   const onImageHandler = (e) => {
@@ -23,13 +25,36 @@ function AdminModal() {
   const onSalePriceHandler = (e) => {
     setSalePrice(e.currentTarget.value);
   }
+  // 할인 유무 입력
+  const [isSale, setIsSale] = useState('true');
+  const onIsSaleHandler = (e) => {
+    setIsSale(e.currentTarget.value);
+  }
+  // 배송비 유무 입력
+  const [shipping, setShipping] = useState('0');
+  const onShippingHandler = (e) => {
+    setShipping(e.currentTarget.value);
+  }
+
 
   // 상품 등록 버튼
-  const onUploadHandler = () => {
-    alert('hello world');
+  const onUploadHandler = (e) => {
+    e.preventDefault();
+    axios.post('/fruit', {
+      img: image,
+      name: name,
+      price: price,
+      salePrice: salePrice,
+      isSale: isSale,
+      shippingFlag: shipping
+    }).then((res) => {
+      alert('등록이 완료되었습니다.');
+    }).catch((error) => {
+      alert(error);
+    })
   }
   return (
-    <Modal>
+    <AdminModalContainer>
       <p>상품을 등록해 주세요.</p>
       <form>
         <label>이미지</label>
@@ -44,28 +69,28 @@ function AdminModal() {
         <label>할인 가격</label>
         <input type='number' value={salePrice} onChange={onSalePriceHandler}/>
 
-        <label>할인 유무</label>
-        <select>
-          <option value='true' defaultChecked>OK🙆‍♂️</option>
+        <label>할인 여부</label>
+        <select onChange={onIsSaleHandler} key={isSale} defaultValue={isSale}>
+          <option value='true' >OK🙆‍♂️</option>
           <option value='false'>NO🙅‍♂️</option>
         </select>
 
         <label>배송비</label>
-        <select>
-          <option value='0' defaultChecked>무료 배송</option>
+        <select onChange={onShippingHandler} key={shipping} defaultValue={shipping} >
+          <option value='0'>무료 배송</option>
           <option value='1'>조건부 배송</option>
           <option value='2'>유료 배송</option>
         </select>
 
         <button type='submit' onClick={onUploadHandler}>등록하기</button>
       </form>
-    </Modal>
+    </AdminModalContainer>
   )
 }
 
 export default AdminModal;
 
-const Modal = styled.div`
+const AdminModalContainer = styled.div`
   width: 800px;
   margin: 0 auto;
   padding: 50px 0;
