@@ -166,9 +166,9 @@ function List() {
         ))}
       </ProductCardContainer>
       <Pagination>
-        <StyledPrev onClick={onClickPrevPage} disabled={onPage < pagination || pagination === 1} />
+        <StyledPrev onClick={onClickPrevPage} disabled={onPage === 1} />
         {pageSpans}
-        <StyledNext onClick={onClickNextPage} disabled={onPage > 1 || pagination === 1} />
+        <StyledNext onClick={onClickNextPage} disabled={onPage >= pagination} />
       </Pagination>
     </ListContainer>
   );
