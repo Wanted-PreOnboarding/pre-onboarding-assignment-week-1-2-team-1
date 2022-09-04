@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import OrderInput from '../../components/order/OrderInput';
 import PaymentSummary from '../../components/order/PaymentSummary';
 import OrderDetailsInfo from '../../components/orderDetails/OrderDetailsInfo';
-import { Roboto } from '../../styles/common';
+import { Color, Roboto } from '../../styles/common';
 
 const OrderDetails = ({
   name,
@@ -16,43 +16,57 @@ const OrderDetails = ({
   detailedAddress,
   isChecked,
 }) => {
+  const [toggle, setToggle] = useState(false);
+
   return (
     <OrderPage>
       <h1 style={{ paddingTop: '30px' }}>주문 상세 내역</h1>
       <OrderDetailsInfo />
-      <BuyerInfoContainer>
-        <article className="userInfo">
-          <h1>주문자 정보</h1>
-          <InpuForm>
-            <OrderInput name={name} value={name} disabled={true} />
-            <OrderInput name={phoneNumber} value={phoneNumber} disabled={true} />
-            <OrderInput name="이메일(선택)" value={email} disabled={true} />
-          </InpuForm>
-        </article>
-
-        <article className="shipInfo">
-          <h1>배송 정보</h1>
-          <InpuForm>
-            <StyleLabel htmlFor="checkBox">
-              <input type="checkbox" id="checkBox" name="checkBox" checked={isChecked} disabled />
-              <span>주문 정보와 동일</span>
-            </StyleLabel>
-            <Flex>
-              <OrderInput name="수령인" value={recipient} disabled={true} />
-              <OrderInput name="연락처" value={recipientPhoneNumber} disabled={true} />
-            </Flex>
-            <OrderInput name="우편번호" value={zipCode} disabled={true} />
-            <OrderInput name="주소" value={address} disabled={true} isWidthPercent={true} />
-            <OrderInput
-              name="상세주소"
-              value={detailedAddress}
-              disabled={true}
-              isWidthPercent={true}
-            />
-          </InpuForm>
-        </article>
-      </BuyerInfoContainer>
-      <PaymentSummary />
+      <ShowDetails>
+        <button onClick={() => setToggle(prev => !prev)}>{toggle ? '접기' : '자세히보기'}</button>
+      </ShowDetails>
+      {toggle && (
+        <>
+          <BuyerInfoContainer>
+            <article className="userInfo">
+              <h1>주문자 정보</h1>
+              <InpuForm>
+                <OrderInput name={name} value={name} disabled={true} />
+                <OrderInput name={phoneNumber} value={phoneNumber} disabled={true} />
+                <OrderInput name="이메일(선택)" value={email} disabled={true} />
+              </InpuForm>
+            </article>
+            <article className="shipInfo">
+              <h1>배송 정보</h1>
+              <InpuForm>
+                <StyleLabel htmlFor="checkBox">
+                  <input
+                    type="checkbox"
+                    id="checkBox"
+                    name="checkBox"
+                    checked={isChecked}
+                    disabled
+                  />
+                  <span>주문 정보와 동일</span>
+                </StyleLabel>
+                <Flex>
+                  <OrderInput name="수령인" value={recipient} disabled={true} />
+                  <OrderInput name="연락처" value={recipientPhoneNumber} disabled={true} />
+                </Flex>
+                <OrderInput name="우편번호" value={zipCode} disabled={true} />
+                <OrderInput name="주소" value={address} disabled={true} isWidthPercent={true} />
+                <OrderInput
+                  name="상세주소"
+                  value={detailedAddress}
+                  disabled={true}
+                  isWidthPercent={true}
+                />
+              </InpuForm>
+            </article>
+          </BuyerInfoContainer>
+          <PaymentSummary />
+        </>
+      )}
     </OrderPage>
   );
 };
@@ -114,5 +128,19 @@ const StyleLabel = styled.label`
   & p {
     ${Roboto(1.2, 600, '#000')};
     line-height: 14px;
+  }
+`;
+
+const ShowDetails = styled.div`
+  display: flex;
+  cursor: pointer;
+  & button {
+    background-color: #fafafa;
+    ${Roboto(1.6, 600, '#000')};
+    border: 0;
+    outline: 0;
+    &:hover {
+      color: ${Color.GR300};
+    }
   }
 `;

@@ -41,7 +41,7 @@ const OrderInfo = () => {
 export default React.memo(OrderInfo);
 
 const OrderInfoContainer = styled.div`
-  margin-bottom: 57px;
+  margin-bottom: 10px;
 
   & ul {
     list-style-type: none;
