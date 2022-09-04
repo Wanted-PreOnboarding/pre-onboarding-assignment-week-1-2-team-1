@@ -67,6 +67,7 @@ const PriceAndDelivery = styled.div`
   }
 `;
 
+//? salesPercent가 반드시 필요할까
 function ProductCard({ productItem }) {
   const {
     id,
@@ -78,8 +79,8 @@ function ProductCard({ productItem }) {
     // saleFlag,
     salePrice,
     // salePercent,
-    // shippingFlag,
-    // shippingPrice,
+    shippingFlag,
+    shippingPrice,
   } = productItem;
 
   const discountPercentage = (100 - (salePrice / price) * 100).toFixed(0);
@@ -89,7 +90,7 @@ function ProductCard({ productItem }) {
   return (
     <ProductCardContainer>
       <ImageWrapperLink to={url}>
-        <div>{chip.length > 0 && chip.map(c => <Chip chip={c} />)}</div>
+        <div>{chip.length > 0 && chip.map((c, idx) => <Chip key={idx} chip={c} />)}</div>
         <img src={img} alt={name} />
       </ImageWrapperLink>
       <ProductCardDescription>
@@ -103,7 +104,7 @@ function ProductCard({ productItem }) {
           </div>
           <PriceAndDelivery>
             <span>{price}</span>
-            <span>무료배송</span>
+            <span>{shippingFlag === 0 ? '무료배송' : `배송료 ${shippingPrice}`}</span>
           </PriceAndDelivery>
         </div>
       </ProductCardDescription>
