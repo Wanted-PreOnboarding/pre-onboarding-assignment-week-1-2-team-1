@@ -6,10 +6,12 @@ import priceSetting from '../../utils/priceSetting';
 
 import axios from 'axios';
 import styled from '@emotion/styled';
+import { FaShareAlt } from 'react-icons/fa';
 
 function Detail() {
   const [fruit, setFruit] = useState(null);
   const [volume, setVolume] = useState(1);
+
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -44,10 +46,10 @@ function Detail() {
             <Chip />
             <ProductTitle>
               <div>{fruit.name}</div>
-              <div />
+              <FaShareAlt color={Color.GR400} size="30px" />
             </ProductTitle>
             <ProductPrice>
-              <span>{Math.ceil(fruit.price - fruit.salePrice / fruit.price) / 1000}% </span>
+              <span>{Math.round(((fruit.price - fruit.salePrice) / fruit.price) * 100)}% </span>
               <span> {priceSetting(fruit.salePrice)}원</span>
             </ProductPrice>
             <DelPrice>{priceSetting(fruit.price)}원</DelPrice>
@@ -76,7 +78,7 @@ function Detail() {
             </ProductOption>
             <TotalPrice>
               <span>총 상품금액:</span>
-              <span>58,000원</span>
+              <span>{priceSetting(volume * fruit.salePrice)}원</span>
             </TotalPrice>
             <BuyButton onClick={onBuyProduct}>구매하기</BuyButton>
           </BuyComponents>
@@ -127,9 +129,10 @@ const ProductTitle = styled.div`
 
   div {
     width: 530px;
-    height: 47px;
+    height: 50px;
     margin-right: 26px;
     ${Roboto(2, 600, '#000')};
+    overflow: auto;
   }
 
   div:last-child {
