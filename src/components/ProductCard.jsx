@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
+import Chip from './Chip';
+
 //todo: 리팩토링 과정을 통해서 style로 컴포넌트 옮기기
 const ProductCardContainer = styled.div`
   width: 240px;
@@ -8,13 +10,19 @@ const ProductCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   text-decoration: none;
+`;
+const ImageWrapperLink = styled(Link)`
+  position: relative;
+  & > div {
+    position: absolute;
+    display: flex;
+  }
   & img {
     width: 240px;
     height: 240px;
     object-fit: cover;
   }
 `;
-const ImageWrapper = styled(Link)``;
 const ProductCardDescription = styled.div`
   height: 114px;
   padding: 0 1rem;
@@ -59,16 +67,31 @@ const PriceAndDelivery = styled.div`
   }
 `;
 
-function ProductCard({ id, img, isSale, name, price, salePrice, chip }) {
+function ProductCard({ productItem }) {
+  const {
+    id,
+    img,
+    chip,
+    name,
+    price,
+    // isSale,
+    // saleFlag,
+    salePrice,
+    // salePercent,
+    // shippingFlag,
+    // shippingPrice,
+  } = productItem;
+
   const discountPercentage = (100 - (salePrice / price) * 100).toFixed(0);
   const url = `/fruit/${id}`;
 
+  //todo : chips 데이터 수정. sale은 chip으로 들어가서는 안될 것 같음. isSale과 겹치는 부분이 생긴다.
   return (
     <ProductCardContainer>
-      <ImageWrapper to={url}>
-        {/* todo: 이후에 absolute로 sale, best,md badge를 추가하기 위해서 div로 감쌌음 */}
+      <ImageWrapperLink to={url}>
+        <div>{chip.length > 0 && chip.map(c => <Chip chip={c} />)}</div>
         <img src={img} alt={name} />
-      </ImageWrapper>
+      </ImageWrapperLink>
       <ProductCardDescription>
         <Link to={url}>
           <h3>{name}</h3>
