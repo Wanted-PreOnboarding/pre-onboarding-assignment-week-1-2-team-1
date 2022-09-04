@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 const OrderInput = ({ name, setValue, placeHolder, isWidthPercent, value, disabled }) => {
   const InputContianer = styled.div`
     box-sizing: border-box;
-    width: ${isWidthPercent ? '100%' : '231px'};
+    max-width: ${isWidthPercent ? '100%' : '231px'};
 
     & label {
       display: block;
