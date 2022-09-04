@@ -58,11 +58,17 @@ const ProductCardContainer = styled.section`
   }
 `;
 const Pagination = styled.div`
+  margin-top: 48px;
+  margin-bottom: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
   & span {
     margin: 4px;
+    cursor: pointer;
+  }
+  & svg {
+    cursor: pointer;
   }
 `;
 
@@ -81,6 +87,7 @@ function List() {
         const { pagination } = meta;
 
         if (!returnPageData) throw new Error('서버로부터의 데이터가 없습니다.');
+
         setPagination(pagination);
         setproductItems(returnPageData);
       } catch (err) {
@@ -99,6 +106,13 @@ function List() {
   for (let i = 0; i < pagination; i++) {
     pageSpans.push(<span onClick={onClickPage}>{i + 1}</span>);
   }
+
+  const onClickPrevPage = () => {
+    setOnPage(prevPage => (prevPage > 1 ? prevPage - 1 : prevPage));
+  };
+  const onClickNextPage = () => {
+    setOnPage(prevPage => (prevPage < pagination ? prevPage + 1 : prevPage));
+  };
 
   return (
     <ListContainer>
@@ -123,9 +137,9 @@ function List() {
         ))}
       </ProductCardContainer>
       <Pagination>
-        <GrFormPrevious />
+        <GrFormPrevious onClick={onClickPrevPage} />
         {pageSpans}
-        <GrFormNext />
+        <GrFormNext onClick={onClickNextPage} />
       </Pagination>
     </ListContainer>
   );
