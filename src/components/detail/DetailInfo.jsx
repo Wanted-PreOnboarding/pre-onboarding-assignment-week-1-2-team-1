@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import Chip from '../Chip';
+import Chip from '../list/Chip';
 import priceSetting from '../../utils/priceSetting';
 import { Roboto, Color } from '../../styles/common';
 
