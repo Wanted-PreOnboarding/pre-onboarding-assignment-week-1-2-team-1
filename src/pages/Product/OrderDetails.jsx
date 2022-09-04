@@ -29,7 +29,7 @@ const OrderDetails = () => {
 
   return (
     <OrderPage>
-      <h1 style={{ paddingTop: '30px' }}>주문 상세 내역</h1>
+      <PageTitleText>주문 상세 내역</PageTitleText>
       {name ? (
         <>
           <OrderDetailsInfo fruit={fruit} volume={volume} />
@@ -102,6 +102,10 @@ const OrderPage = styled.main`
   width: 1240px;
   margin: 0 auto;
   padding-bottom: 80vh;
+`;
+
+const PageTitleText = styled.h1`
+  padding-top: 30px;
 `;
 
 const BuyerInfoContainer = styled.section`
