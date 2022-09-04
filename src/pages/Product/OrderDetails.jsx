@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import OrderInput from '../../components/order/OrderInput';
-import PaymentSummary from '../../components/order/PaymentSummary';
 import OrderDetailsInfo from '../../components/orderDetails/OrderDetailsInfo';
 import { Color, Roboto } from '../../styles/common';
+import FinalPaymentSummary from '../../components/orderDetails/FinalPaymentSummary';
 
 const OrderDetails = ({
   name,
@@ -27,6 +27,7 @@ const OrderDetails = ({
       </ShowDetails>
       {toggle && (
         <>
+          <hr />
           <BuyerInfoContainer>
             <article className="userInfo">
               <h1>주문자 정보</h1>
@@ -64,7 +65,7 @@ const OrderDetails = ({
               </InpuForm>
             </article>
           </BuyerInfoContainer>
-          <PaymentSummary />
+          <FinalPaymentSummary />
         </>
       )}
     </OrderPage>
