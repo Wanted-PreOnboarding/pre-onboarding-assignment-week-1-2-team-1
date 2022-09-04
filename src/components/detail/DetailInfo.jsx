@@ -45,9 +45,9 @@ function DetailInfo({ fruit, id }) {
           <span> {priceSetting(fruit.salePrice)}원</span>
         </ProductPrice>
         <DelPrice>{priceSetting(fruit.price)}원</DelPrice>
-        <hr />
+        <Hr />
         <ProductDescription>설명이 아직 없습니다</ProductDescription>
-        <hr />
+        <Hr />
         <ProductOption>
           <span>원산지</span>
           <span>Korea</span>
@@ -93,10 +93,17 @@ export default DetailInfo;
 
 const InfoComponents = styled.div`
   display: flex;
+  @media screen and (max-width: 1240px) {
+    width: 36.063rem;
+    flex-direction: column;
+  }
 `;
 
 const BuyComponents = styled.div`
   margin-left: 21px;
+  @media screen and (max-width: 1240px) {
+    margin-top: 1rem;
+  }
 `;
 
 const ChipContainer = styled.div`
@@ -140,13 +147,20 @@ const DelPrice = styled.del`
 `;
 
 const ProductDescription = styled.div`
-  width: 609px;
-  height: 123px;
+  width: 36.063rem;
+  height: 7.688rem;
+`;
+
+const Hr = styled.div`
+  width: 36.063rem;
+  height: 1px;
+  background-color: ${Color.GY200};
+  margin: 0.6rem 0;
 `;
 
 const ProductOption = styled.div`
-  width: 609px;
-  height: 37px;
+  width: 36.063rem;
+  height: 2.313rem;
   border-bottom: 1px solid ${Color.GY200};
   margin-bottom: 8px;
   display: flex;
@@ -215,6 +229,10 @@ const BuyButton = styled.button`
   &:hover {
     background-color: ${Color.GR200};
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 1240px) {
+    width: 36.063rem;
   }
 `;
 

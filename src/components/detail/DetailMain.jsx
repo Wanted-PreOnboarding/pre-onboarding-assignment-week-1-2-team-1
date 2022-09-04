@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 
 function DetailMain() {
   return (
-    <div>
+    <Container>
       <ViewMenu>
         <ViewMenuButton href="#1">상품상세정보</ViewMenuButton>
         <ViewMenuButton href="#2">고객리뷰(0)</ViewMenuButton>
@@ -21,15 +21,21 @@ function DetailMain() {
         <div>Q&A(0)</div>
         <div>등록된 문의사항이 없습니다.</div>
       </ReviewOrQna>
-    </div>
+    </Container>
   );
 }
 
 export default DetailMain;
 
+const Container = styled.div`
+  @media screen and (max-width: 1240px) {
+    width: 36.063rem;
+    margin-left: 21px;
+  }
+`;
+
 const ViewMenu = styled.div`
   display: flex;
-
   margin-top: 150px;
 `;
 
@@ -55,6 +61,11 @@ const DetailImg = styled.img`
   width: 850px;
   height: 1100px;
   margin: 384px 200px;
+
+  @media screen and (max-width: 1240px) {
+    width: 36.063rem;
+    margin: 30px 0;
+  }
 `;
 
 const ReviewOrQna = styled.div`
