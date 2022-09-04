@@ -129,9 +129,10 @@ const ProductTitle = styled.div`
 
   div {
     width: 530px;
-    height: 47px;
+    height: 50px;
     margin-right: 26px;
     ${Roboto(2, 600, '#000')};
+    overflow: auto;
   }
 
   div:last-child {
