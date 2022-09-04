@@ -86,14 +86,16 @@ const PaginationButton = styled.span`
 function List() {
   const [productItems, setproductItems] = useState([]);
   const [pagination, setPagination] = useState(0);
-  const [onPage, setOnPage] = useState(1);
 
-  const chipsMenus = ['Sale', 'Best', 'MD', '전체'];
+  const [onPage, setOnPage] = useState(1);
+  const [onChip, setOnChip] = useState('SALE');
+
+  const chipsMenus = ['SALE', 'BEST', 'MD', '전체'];
 
   useEffect(() => {
     const fetchProducItems = async () => {
       try {
-        const { data } = await axios.get(`getfruits?page=${onPage}`);
+        const { data } = await axios.get(`getfruits?page=${onPage}&chip=${onChip}`);
         const { returnPageData, meta } = data;
         const { pagination } = meta;
 
