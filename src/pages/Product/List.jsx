@@ -8,8 +8,10 @@ import ProductCard from '../../components/ProductCard';
 const ListContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const Introduction = styled.section`
   width: 100%;
