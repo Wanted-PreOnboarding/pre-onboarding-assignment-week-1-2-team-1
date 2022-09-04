@@ -149,17 +149,33 @@ const fruits = [
 export const handlers = [
   //상품 조회
   rest.get('/getfruits', async (req, res, ctx) => {
-    //페이지 넘겨주세요
+    const perPage = 10;
+
     const page = req.url.searchParams.get('page');
+    const chip = req.url.searchParams.get('chip');
+
+    const fruitsCopy = fruits.slice(0);
+    const filteredFruits = fruitsCopy.filter(fruit => {
+      if (!chip) return true;
+
+      if (fruit.chip.includes(chip)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
 
     const result = [];
-    for (let i = 0; i < fruits.length; i += 10) {
-      result.push(fruits.slice(i, i + 10));
+    for (let i = 0; i < filteredFruits.length; i += perPage) {
+      result.push(filteredFruits.slice(i, i + perPage));
     }
+
     const returnPageData = result[Number(page) - 1];
+    const meta = { pagination: Math.ceil(filteredFruits.length / perPage) };
     return res(
       ctx.status(200),
       ctx.json({
+        meta,
         returnPageData,
       })
     );
