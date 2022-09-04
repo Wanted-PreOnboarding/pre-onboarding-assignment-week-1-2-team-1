@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from '@emotion/styled';
 
 import ProductCard from '../../components/ProductCard';
+import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 
 //todo: refacotring을 할 때, style 폴더로 옮겨야 함.
 const ListContainer = styled.div`
@@ -57,6 +58,9 @@ const ProductCardContainer = styled.section`
   }
 `;
 const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   & span {
     margin: 4px;
   }
@@ -118,7 +122,11 @@ function List() {
           <ProductCard key={productItem.id} productItem={productItem} />
         ))}
       </ProductCardContainer>
-      <Pagination>{pageSpans}</Pagination>
+      <Pagination>
+        <GrFormPrevious />
+        {pageSpans}
+        <GrFormNext />
+      </Pagination>
     </ListContainer>
   );
 }
