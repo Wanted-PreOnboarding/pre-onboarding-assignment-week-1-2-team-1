@@ -6,7 +6,7 @@ import List from './pages/Product/List';
 import { AppContainer } from './styles/reset';
 
 import Detail from './pages/Product/Detail';
-import Order from './pages/Order';
+import Order from './pages/Product/Order';
 import OrderDetails from './pages/Product/OrderDetails';
 
 function App() {

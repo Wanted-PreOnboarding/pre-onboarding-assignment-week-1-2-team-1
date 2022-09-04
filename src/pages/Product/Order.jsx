@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import OrderInfo from '../components/order/OrderInfo';
+import OrderInfo from '../../components/order/OrderInfo';
 import styled from '@emotion/styled';
-import OrderInput from '../components/order/OrderInput';
-import PaymentSummary from '../components/order/PaymentSummary';
-import priceSetting from '../utils/priceSetting';
-import { Color, Roboto } from '../styles/common';
+import OrderInput from '../../components/order/OrderInput';
+import PaymentSummary from '../../components/order/PaymentSummary';
+import priceSetting from '../../utils/priceSetting';
+import { Color, Roboto } from '../../styles/common';
 import { useLocation, useNavigate, useParams } from 'react-router';
 const Order = () => {
   const { id } = useParams();
-  const navigate = useNavigate('');
 
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -19,9 +18,23 @@ const Order = () => {
   const [address, setAddress] = useState('');
   const [detailedAddress, setDetailedAddress] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { fruit, volume } = location.state;
 
-  const { state } = useLocation();
-  const { fruit, volume } = state;
+  const hasSippingPrice = () => {
+    const fruitData = { ...fruit };
+    if (fruitData.shippingFlag === 2) {
+      return fruitData.shippingPrice;
+    } else {
+      return 0;
+    }
+  };
+
+  const totalPayment = () => {
+    const fruitData = { ...fruit };
+    return fruitData.price * 2 - fruitData.salePrice - hasSippingPrice();
+  };
 
   const isDisabled =
     name &&
@@ -31,16 +44,18 @@ const Order = () => {
     zipCode &&
     address &&
     detailedAddress;
+
   useEffect(() => {
     if (isChecked) {
       document.getElementById('수령인').value = name;
       setRecipient(name);
-      document.getElementById('연락처').value = phoneNumber;
+
+      document.getElementById('수령인 연락처').value = phoneNumber;
       setRecipientPhoneNumber(phoneNumber);
     } else {
       document.getElementById('수령인').value = '';
       setRecipient('');
-      document.getElementById('연락처').value = '';
+      document.getElementById('수령인 연락처').value = '';
       setRecipientPhoneNumber('');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,13 +86,14 @@ const Order = () => {
         address,
         detailedAddress,
         isChecked,
+        id,
       },
     });
   };
 
   return (
     <OrderPage>
-      <OrderInfo fruit={fruit} volume={volume} />
+      <OrderInfo info={fruit} volume={volume} />
       <BuyerInfoContainer>
         <article className="userInfo">
           <h1>주문자 정보</h1>
@@ -105,7 +121,7 @@ const Order = () => {
               <OrderInput placeHolder="이름" name="수령인" setValue={setRecipient} />
               <OrderInput
                 placeHolder="010-xxxx-xxxx"
-                name="연락처"
+                name="수령인 연락처"
                 setValue={setRecipientPhoneNumber}
               />
             </Flex>
@@ -125,9 +141,9 @@ const Order = () => {
           </InpuForm>
         </article>
       </BuyerInfoContainer>
-      <PaymentSummary fruit={fruit} volume={volume} />
+      <PaymentSummary info={fruit} />
       <Button disabled={!isDisabled} onClick={paymentHandler}>
-        총 {priceSetting(33900)}원 결제하기
+        총 {priceSetting(totalPayment())}원 결제하기
       </Button>
     </OrderPage>
   );
@@ -136,13 +152,37 @@ const Order = () => {
 export default Order;
 
 const OrderPage = styled.main`
-  width: 1240px;
+  max-width: 1240px;
   margin: 0 auto;
   padding-bottom: 158px;
+  @media (max-width: 765px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & section {
+      width: 80% !important;
+
+      align-items: center;
+
+      & article {
+        width: 100% !important;
+      }
+    }
+    & button {
+      width: 80%;
+      height: 88px;
+      ${Roboto(2.4, 600, '#fff')};
+    }
+  }
 `;
 
 const BuyerInfoContainer = styled.section`
   display: flex;
+  @media (max-width: 765px) {
+    flex-direction: column;
+    align-items: center;
+  }
   justify-content: space-between;
   margin-bottom: 38px;
 
