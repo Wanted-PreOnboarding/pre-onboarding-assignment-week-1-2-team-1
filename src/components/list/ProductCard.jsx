@@ -7,9 +7,25 @@ import Chip from './Chip';
 const ProductCardContainer = styled.div`
   width: 240px;
   height: 334px;
+  position: relative;
   display: flex;
   flex-direction: column;
   text-decoration: none;
+`;
+const NoSale = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 1rem;
+  word-break: keep-all;
+  text-align: center;
 `;
 const ImageWrapperLink = styled(Link)`
   position: relative;
@@ -75,8 +91,7 @@ function ProductCard({ productItem }) {
     chip,
     name,
     price,
-    // isSale,
-    // saleFlag,
+    saleFlag,
     salePrice,
     // salePercent,
     shippingFlag,
@@ -89,6 +104,9 @@ function ProductCard({ productItem }) {
   //todo : chips 데이터 수정. sale은 chip으로 들어가서는 안될 것 같음. isSale과 겹치는 부분이 생긴다.
   return (
     <ProductCardContainer>
+      {saleFlag > 0 && (
+        <NoSale>{saleFlag === 1 ? '이 상품은 현재 판매기간이 아닙니다' : 'SOLD OUT'}</NoSale>
+      )}
       <ImageWrapperLink to={url}>
         <div>{chip.length > 0 && chip.map((c, idx) => <Chip key={idx} chip={c} />)}</div>
         <img src={img} alt={name} />
