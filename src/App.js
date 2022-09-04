@@ -12,8 +12,8 @@ function App() {
     <AppContainer className="App">
       <Header />
       <Routes>
-        <Route path="/product" element={<List />} />
         <Route path="/fruit/:id" element={<Detail />} />
+        <Route path="/fruits" element={<List />} />
       </Routes>
       <Footer />
     </AppContainer>
