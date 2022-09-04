@@ -65,9 +65,10 @@ const PriceChip = styled.div`
 `;
 
 export const Summary = styled.section`
-  @media (max-width: 765px) {
-    /*   */
-    width: 80% !important;
+  @media (max-width: 1240px) {
+    width: 100% !important;
+    margin: auto;
+    margin-bottom: 57px;
 
     & .container {
       position: relative;

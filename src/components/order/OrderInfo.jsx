@@ -170,13 +170,13 @@ const ProductName = styled.div`
   }
 `;
 
-const MyOrderHistoryContainer = styled.div`
+export const MyOrderHistoryContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
 
-  @media (max-width: 765px) {
+  @media (max-width: 1240px) {
     & .shipping {
       display: none;
     }

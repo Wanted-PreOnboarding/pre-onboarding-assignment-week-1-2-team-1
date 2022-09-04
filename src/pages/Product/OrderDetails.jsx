@@ -102,10 +102,18 @@ const OrderPage = styled.main`
   width: 1240px;
   margin: 0 auto;
   padding-bottom: 80vh;
+
+  @media (max-width: 1240px) {
+    width: 90%;
+  }
 `;
 
 const PageTitleText = styled.h1`
   padding-top: 30px;
+
+  @media (max-width: 1240px) {
+    padding-left: 30px;
+  }
 `;
 
 const BuyerInfoContainer = styled.section`
@@ -122,6 +130,18 @@ const BuyerInfoContainer = styled.section`
 
   & article {
     box-sizing: border-box;
+  }
+
+  @media (max-width: 1240px) {
+    flex-direction: column;
+    align-items: center;
+
+    & .userInfo {
+      width: 100%;
+    }
+    & .shipInfo {
+      width: 100%;
+    }
   }
 `;
 const InpuForm = styled.div`
@@ -161,6 +181,11 @@ const ShowDetails = styled.div`
     &:hover {
       color: ${Color.GR300};
     }
+  }
+
+  @media (max-width: 1240px) {
+    width: 80%;
+    margin: auto;
   }
 `;
 
