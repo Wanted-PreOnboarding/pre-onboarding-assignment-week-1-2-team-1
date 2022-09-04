@@ -72,7 +72,13 @@ function DetailInfo({ fruit, id }) {
           <span>총 상품금액:</span>
           <span>{priceSetting(volume * fruit.salePrice)}원</span>
         </TotalPrice>
-        <BuyButton onClick={onBuyProduct}>구매하기</BuyButton>
+        {fruit.saleFlag === 0 ? (
+          <BuyButton onClick={onBuyProduct}>구매하기</BuyButton>
+        ) : fruit.saleFlag === 1 ? (
+          <NoneButton disabled>이 상품은 현재 판매기간이 아닙니다.</NoneButton>
+        ) : (
+          <SoldOutButton disabled>품절된 상품입니다.</SoldOutButton>
+        )}
       </BuyComponents>
     </InfoComponents>
   );
@@ -204,5 +210,22 @@ const BuyButton = styled.button`
   &:hover {
     background-color: ${Color.GR200};
     cursor: pointer;
+  }
+`;
+
+const SoldOutButton = styled(BuyButton)`
+  background-color: ${Color.GY200};
+  &:hover {
+    background-color: ${Color.GY200};
+    cursor: default;
+  }
+`;
+
+const NoneButton = styled(BuyButton)`
+  background-color: ${Color.GY100};
+  color: black;
+  &:hover {
+    background-color: ${Color.GY100};
+    cursor: default;
   }
 `;
