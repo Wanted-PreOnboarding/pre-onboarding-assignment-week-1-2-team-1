@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from '@emotion/styled';
 
 import ProductCard from '../../components/ProductCard';
-import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
+import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 
 //todo: refacotring을 할 때, style 폴더로 옮겨야 함.
 const ListContainer = styled.div`
@@ -64,10 +64,19 @@ const Pagination = styled.div`
   justify-content: center;
   align-items: center;
   & svg {
-    cursor: pointer;
-    color: ${({ test }) => {}};
+    font-size: 1.5rem;
   }
 `;
+
+const StyledPrev = styled(MdNavigateBefore)`
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  color: ${({ disabled }) => (disabled ? '#929892' : 'black')};
+`;
+const StyledNext = styled(MdNavigateNext)`
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  color: ${({ disabled }) => (disabled ? '#929892' : 'black')};
+`;
+
 const PaginationButton = styled.span`
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -144,9 +153,9 @@ function List() {
         ))}
       </ProductCardContainer>
       <Pagination>
-        <GrFormPrevious onClick={onClickPrevPage} />
+        <StyledPrev onClick={onClickPrevPage} disabled={onPage < pagination} />
         {pageSpans}
-        <GrFormNext onClick={onClickNextPage} />
+        <StyledNext onClick={onClickNextPage} disabled={onPage > 1} />
       </Pagination>
     </ListContainer>
   );
