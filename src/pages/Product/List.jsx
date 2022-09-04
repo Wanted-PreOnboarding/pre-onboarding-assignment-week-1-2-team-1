@@ -3,13 +3,16 @@ import axios from 'axios';
 import styled from '@emotion/styled';
 
 import ProductCard from '../../components/ProductCard';
+import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 
 //todo: refacotring을 할 때, style 폴더로 옮겨야 함.
 const ListContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const Introduction = styled.section`
   width: 100%;
@@ -55,26 +58,49 @@ const ProductCardContainer = styled.section`
   }
 `;
 const Pagination = styled.div`
-  & span {
-    margin: 4px;
+  margin-top: 48px;
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & svg {
+    font-size: 1.5rem;
   }
+`;
+
+const StyledPrev = styled(MdNavigateBefore)`
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  color: ${({ disabled }) => (disabled ? '#929892' : 'black')};
+`;
+const StyledNext = styled(MdNavigateNext)`
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  color: ${({ disabled }) => (disabled ? '#929892' : 'black')};
+`;
+
+const PaginationButton = styled.span`
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: ${({ isSelected }) => (isSelected ? 'bold' : 'normal')};
+  color: ${({ isSelected }) => isSelected && '#206B0C'};
 `;
 
 function List() {
   const [productItems, setproductItems] = useState([]);
-  const [pagination, setPagination] = useState(1);
+  const [pagination, setPagination] = useState(0);
+  const [onPage, setOnPage] = useState(1);
 
   const chipsMenus = ['Sale', 'Best', 'MD', '전체'];
-  //todo : 더미 데이터임. 나중에는 최초로 서버에서 메타데이터를 받아 page의 개수만큼 페이지네이션이 가능하도록 구현.
-  const pages = [1, 2, 3, 4];
 
-  //todo : 만약 페이지가 없을 경우에 대한 에러 핸들링도 필요로 함
   useEffect(() => {
     const fetchProducItems = async () => {
       try {
-        const { data } = await axios.get(`getfruits?page=${pagination}`);
-        const { returnPageData } = data;
+        const { data } = await axios.get(`getfruits?page=${onPage}`);
+        const { returnPageData, meta } = data;
+        const { pagination } = meta;
+
         if (!returnPageData) throw new Error('서버로부터의 데이터가 없습니다.');
+
+        setPagination(pagination);
         setproductItems(returnPageData);
       } catch (err) {
         console.error(err);
@@ -83,10 +109,25 @@ function List() {
     };
 
     fetchProducItems();
-  }, [pagination]);
+  }, [onPage]);
 
   const onClickPage = e => {
-    setPagination(parseInt(e.target.textContent, 10));
+    setOnPage(parseInt(e.target.textContent, 10));
+  };
+  const pageSpans = [];
+  for (let i = 0; i < pagination; i++) {
+    pageSpans.push(
+      <PaginationButton isSelected={onPage === i + 1} onClick={onClickPage}>
+        {i + 1}
+      </PaginationButton>
+    );
+  }
+
+  const onClickPrevPage = () => {
+    setOnPage(prevPage => (prevPage > 1 ? prevPage - 1 : prevPage));
+  };
+  const onClickNextPage = () => {
+    setOnPage(prevPage => (prevPage < pagination ? prevPage + 1 : prevPage));
   };
 
   return (
@@ -112,14 +153,13 @@ function List() {
         ))}
       </ProductCardContainer>
       <Pagination>
-        {pages.map((page, idx) => (
-          <span key={idx} onClick={onClickPage}>
-            {page}
-          </span>
-        ))}
+        <StyledPrev onClick={onClickPrevPage} disabled={onPage < pagination} />
+        {pageSpans}
+        <StyledNext onClick={onClickNextPage} disabled={onPage > 1} />
       </Pagination>
     </ListContainer>
   );
 }
 
 export default List;
+//todo : prev로 더이상 갈 수 없을 경우 아이콘을 흐리게 하는 효과 추가하기
