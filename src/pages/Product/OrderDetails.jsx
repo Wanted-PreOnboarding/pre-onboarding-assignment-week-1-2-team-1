@@ -4,6 +4,7 @@ import OrderInput from '../../components/order/OrderInput';
 import OrderDetailsInfo from '../../components/orderDetails/OrderDetailsInfo';
 import { Color, Roboto } from '../../styles/common';
 import FinalPaymentSummary from '../../components/orderDetails/FinalPaymentSummary';
+import { orderNum } from '../../utils/OrderNums';
 
 const OrderDetails = ({
   name,
@@ -17,56 +18,71 @@ const OrderDetails = ({
   isChecked,
 }) => {
   const [toggle, setToggle] = useState(false);
+  const { orderTime, orderNumber } = orderNum();
 
   return (
     <OrderPage>
       <h1 style={{ paddingTop: '30px' }}>주문 상세 내역</h1>
-      <OrderDetailsInfo />
-      <ShowDetails>
-        <button onClick={() => setToggle(prev => !prev)}>{toggle ? '접기' : '자세히보기'}</button>
-      </ShowDetails>
-      {toggle && (
+      {name ? (
         <>
-          <hr />
-          <BuyerInfoContainer>
-            <article className="userInfo">
-              <h1>주문자 정보</h1>
-              <InpuForm>
-                <OrderInput name={name} value={name} disabled={true} />
-                <OrderInput name={phoneNumber} value={phoneNumber} disabled={true} />
-                <OrderInput name="이메일(선택)" value={email} disabled={true} />
-              </InpuForm>
-            </article>
-            <article className="shipInfo">
-              <h1>배송 정보</h1>
-              <InpuForm>
-                <StyleLabel htmlFor="checkBox">
-                  <input
-                    type="checkbox"
-                    id="checkBox"
-                    name="checkBox"
-                    checked={isChecked}
-                    disabled
-                  />
-                  <span>주문 정보와 동일</span>
-                </StyleLabel>
-                <Flex>
-                  <OrderInput name="수령인" value={recipient} disabled={true} />
-                  <OrderInput name="연락처" value={recipientPhoneNumber} disabled={true} />
-                </Flex>
-                <OrderInput name="우편번호" value={zipCode} disabled={true} />
-                <OrderInput name="주소" value={address} disabled={true} isWidthPercent={true} />
-                <OrderInput
-                  name="상세주소"
-                  value={detailedAddress}
-                  disabled={true}
-                  isWidthPercent={true}
-                />
-              </InpuForm>
-            </article>
-          </BuyerInfoContainer>
-          <FinalPaymentSummary />
+          <OrderDetailsInfo />
+          <ShowDetails>
+            <OrderNum>
+              <b>주문번호: </b>
+              {orderNumber}
+              <b>주문일자: </b>
+              {orderTime}
+            </OrderNum>
+            <button onClick={() => setToggle(prev => !prev)}>
+              {toggle ? '접기' : '자세히보기'}
+            </button>
+          </ShowDetails>
+          {toggle && (
+            <>
+              <hr />
+              <BuyerInfoContainer>
+                <article className="userInfo">
+                  <h1>주문자 정보</h1>
+                  <InpuForm>
+                    <OrderInput name="이름" value={name} disabled={true} />
+                    <OrderInput name="연락처" value={phoneNumber} disabled={true} />
+                    <OrderInput name="이메일(선택)" value={email} disabled={true} />
+                  </InpuForm>
+                </article>
+                <article className="shipInfo">
+                  <h1>배송 정보</h1>
+                  <InpuForm>
+                    <StyleLabel htmlFor="checkBox">
+                      <input
+                        type="checkbox"
+                        id="checkBox"
+                        name="checkBox"
+                        checked={isChecked}
+                        disabled
+                      />
+                      <span>주문 정보와 동일</span>
+                    </StyleLabel>
+                    <Flex>
+                      <OrderInput name="수령인" value={recipient} disabled={true} />
+                      <OrderInput name="연락처" value={recipientPhoneNumber} disabled={true} />
+                    </Flex>
+                    <OrderInput name="우편번호" value={zipCode} disabled={true} />
+                    <OrderInput name="주소" value={address} disabled={true} isWidthPercent={true} />
+                    <OrderInput
+                      name="상세주소"
+                      value={detailedAddress}
+                      disabled={true}
+                      isWidthPercent={true}
+                    />
+                  </InpuForm>
+                </article>
+              </BuyerInfoContainer>
+              <FinalPaymentSummary />
+            </>
+          )}
         </>
+      ) : (
+        '주문 내역이 없습니다.'
       )}
     </OrderPage>
   );
@@ -134,6 +150,7 @@ const StyleLabel = styled.label`
 
 const ShowDetails = styled.div`
   display: flex;
+  justify-content: space-between;
   cursor: pointer;
   & button {
     background-color: #fafafa;
@@ -143,5 +160,11 @@ const ShowDetails = styled.div`
     &:hover {
       color: ${Color.GR300};
     }
+  }
+`;
+
+const OrderNum = styled.p`
+  & b + b {
+    margin-left: 20px;
   }
 `;

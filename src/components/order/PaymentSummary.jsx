@@ -9,11 +9,6 @@ export const PaymentPrice = ({ title, price, emphasis }) => {
     <PriceChip>
       <span className="title">{title}</span>
       <span className={`price ${emphasis}`}>{priceSetting(price)}원</span>
-      {/* {emphasis === 'true' ? (
-        <span className="emphasis">{priceSetting(price)}원</span>
-      ) : (
-        <span className="price">{priceSetting(price)}원</span>
-      )} */}
     </PriceChip>
   );
 };
