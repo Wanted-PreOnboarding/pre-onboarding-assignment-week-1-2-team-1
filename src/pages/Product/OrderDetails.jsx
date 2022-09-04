@@ -78,6 +78,7 @@ const OrderDetails = ({
                 </article>
               </BuyerInfoContainer>
               <FinalPaymentSummary />
+              <hr />
             </>
           )}
         </>
@@ -106,7 +107,7 @@ export default OrderDetails;
 const OrderPage = styled.main`
   width: 1240px;
   margin: 0 auto;
-  padding-bottom: 158px;
+  padding-bottom: 80vh;
 `;
 
 const BuyerInfoContainer = styled.section`
@@ -154,9 +155,11 @@ const ShowDetails = styled.div`
   cursor: pointer;
   & button {
     background-color: #fafafa;
-    ${Roboto(1.6, 600, '#000')};
+    margin-right: 20px;
+    ${Roboto(1.6, 600, Color.GR400)};
     border: 0;
     outline: 0;
+    cursor: pointer;
     &:hover {
       color: ${Color.GR300};
     }
