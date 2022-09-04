@@ -70,6 +70,21 @@ export const handlers = [
     return res(ctx.status(201));
   }),
 
+  //상품 노출 수정
+  rest.put('/allfruit', (req, res, ctx) => {
+    const body = req.body;
+    const parsedBody = JSON.parse(body);
+    parsedBody.map(item => {
+      fruits.splice(
+        fruits.findIndex(f => f.id === item.id),
+        1,
+        { ...fruits[fruits.findIndex(f => f.id === item.id)], saleFlag: item.saleFlag }
+      );
+    });
+
+    return res(ctx.status(201));
+  }),
+
   //상품 삭제
   rest.delete('/fruit', (req, res, ctx) => {
     const id = req.url.searchParams.get('id');
