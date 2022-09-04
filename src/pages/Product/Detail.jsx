@@ -6,10 +6,12 @@ import priceSetting from '../../utils/priceSetting';
 
 import axios from 'axios';
 import styled from '@emotion/styled';
+import { FaShareAlt } from 'react-icons/fa';
 
 function Detail() {
   const [fruit, setFruit] = useState(null);
   const [volume, setVolume] = useState(1);
+
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -44,7 +46,7 @@ function Detail() {
             <Chip />
             <ProductTitle>
               <div>{fruit.name}</div>
-              <div />
+              <FaShareAlt color={Color.GR400} size="30px" />
             </ProductTitle>
             <ProductPrice>
               <span>{Math.ceil(fruit.price - fruit.salePrice / fruit.price) / 1000}% </span>
