@@ -13,21 +13,32 @@ export const PaymentPrice = ({ title, price, emphasis }) => {
   );
 };
 
-function PaymentSummary({ fruit, volume }) {
+function PaymentSummary({ info }) {
+  const hasSippingPrice = () => {
+    const fruitData = { ...info };
+    if (fruitData.shippingFlag === 2) {
+      return fruitData.shippingPrice;
+    } else {
+      return 0;
+    }
+  };
+
+  const totalPayment = () => {
+    const fruitData = { ...info };
+    return fruitData.price * 2 - fruitData.salePrice - hasSippingPrice();
+  };
+
   return (
     <Summary>
       <h1>결제요약</h1>
       <div className="container">
-        <PaymentPrice title="총 상품금액" price={fruit.price * volume} />
-        <Operator>+</Operator>
-        <PaymentPrice title="총 할인금액" price={(fruit.price - fruit.salePrice) * volume} />
+        <PaymentPrice title="총 상품금액" price={info.price} />
         <Operator>-</Operator>
-        <PaymentPrice title="배송비" price={fruit.shippingPrice} />
+        <PaymentPrice title="총 할인금액" price={info.price - info.salePrice} />
+        <Operator>+</Operator>
+        <PaymentPrice title="배송비" price={hasSippingPrice()} />
         <Operator>=</Operator>
-        <PaymentPrice
-          title="총 결제 예정금액"
-          price={fruit.salePrice * volume + fruit.shippingPrice}
-        />
+        <PaymentPrice title="총 결제 예정금액" price={totalPayment()} />
       </div>
     </Summary>
   );
@@ -54,6 +65,16 @@ const PriceChip = styled.div`
 `;
 
 export const Summary = styled.section`
+  @media (max-width: 765px) {
+    /*   */
+    width: 80% !important;
+
+    & .container {
+      position: relative;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
   width: 100%;
   margin-bottom: 57px;
   & h1 {

@@ -15,7 +15,7 @@ function DetailInfo({ fruit, id }) {
 
   const onBuyProduct = () => {
     navigate(`/fruit/${id}/payment`, {
-      state: { fruit, volume },
+      state: { fruit, volume, id },
     });
   };
 
