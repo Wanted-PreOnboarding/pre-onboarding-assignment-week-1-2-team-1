@@ -8,7 +8,7 @@ function Header() {
       <img src={`${process.env.PUBLIC_URL}/imgs/프룻로고.jpg`} alt="메인로고" />
       <nav>
         <Link to="/fruit">상품리스트</Link>
-        <Link to="/admin">관리자 페이지</Link>
+        <Link to="/admin?page=1">관리자 페이지</Link>
       </nav>
     </HeaderComponent>
   );
