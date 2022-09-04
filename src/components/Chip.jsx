@@ -5,12 +5,15 @@ const ChipSpan = styled.span`
   height: 18px;
   font-size: 10px;
   color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const MdChip = styled(ChipSpan)`
   background-color: #4a9536;
 `;
 const SaleChip = styled(ChipSpan)`
-  background-color: #483695;
+  background-color: #95366f;
 `;
 const BestChip = styled(ChipSpan)`
   background-color: #483695;
