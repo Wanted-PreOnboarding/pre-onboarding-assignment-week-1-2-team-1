@@ -5,6 +5,7 @@ import OrderDetailsInfo from '../../components/orderDetails/OrderDetailsInfo';
 import { Color, Roboto } from '../../styles/common';
 import FinalPaymentSummary from '../../components/orderDetails/FinalPaymentSummary';
 import { orderNum } from '../../utils/OrderNums';
+import { useMemo } from 'react';
 
 const OrderDetails = ({
   name,
@@ -18,7 +19,7 @@ const OrderDetails = ({
   isChecked,
 }) => {
   const [toggle, setToggle] = useState(false);
-  const { orderTime, orderNumber } = orderNum();
+  const { orderTime, orderNumber } = useMemo(() => orderNum(), []);
 
   return (
     <OrderPage>
