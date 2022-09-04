@@ -78,7 +78,7 @@ function Detail() {
             </ProductOption>
             <TotalPrice>
               <span>총 상품금액:</span>
-              <span>58,000원</span>
+              <span>{priceSetting(volume * fruit.salePrice)}원</span>
             </TotalPrice>
             <BuyButton onClick={onBuyProduct}>구매하기</BuyButton>
           </BuyComponents>
