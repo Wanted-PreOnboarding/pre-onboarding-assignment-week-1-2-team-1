@@ -49,7 +49,7 @@ function Detail() {
               <FaShareAlt color={Color.GR400} size="30px" />
             </ProductTitle>
             <ProductPrice>
-              <span>{Math.ceil(fruit.price - fruit.salePrice / fruit.price) / 1000}% </span>
+              <span>{Math.round(((fruit.price - fruit.salePrice) / fruit.price) * 100)}% </span>
               <span> {priceSetting(fruit.salePrice)}원</span>
             </ProductPrice>
             <DelPrice>{priceSetting(fruit.price)}원</DelPrice>
