@@ -9,9 +9,9 @@ const OrderInfo = ({ fruit, volume }) => {
       <ul>
         <li>상품이미지</li>
         <li>상품정보</li>
-        <li>배송비</li>
         <li>수량</li>
-        <li>결제 예정 금액(상품금액 + 배송비)</li>
+        <li>주문금액</li>
+        <li>주문상태</li>
       </ul>
       <MyOrderHistoryContainer>
         <img src={fruit.img} alt="내가 구입할 상품" />
@@ -21,14 +21,15 @@ const OrderInfo = ({ fruit, volume }) => {
             <Chip>필수 선택</Chip> <span>유자청 480g(960g)/2개</span>
           </Flex>
         </ProductName>
-        <span className="shipping">{priceSetting(fruit.shippingPrice)}원</span>
-        <span>{volume}</span>
-        <Price>
+        <Amount>{volume}</Amount>
+        <Price style={{ textAlign: 'center' }}>
           <h1>{priceSetting(fruit.salePrice * volume + fruit.shippingPrice)}원</h1>
-          <span>
-            {priceSetting(fruit.salePrice * volume)}원 + {priceSetting(fruit.shippingPrice)}원
-          </span>
         </Price>
+        <OrderStatus>
+          <span>상품 준비중</span>
+          <button>배송조회</button>
+        </OrderStatus>
+        <DivForEmptySpace />
       </MyOrderHistoryContainer>
     </OrderInfoContainer>
   );
@@ -37,8 +38,7 @@ const OrderInfo = ({ fruit, volume }) => {
 export default React.memo(OrderInfo);
 
 const OrderInfoContainer = styled.div`
-  margin-bottom: 57px;
-  margin-top: 57px;
+  margin-bottom: 10px;
 
   & ul {
     list-style-type: none;
@@ -57,18 +57,23 @@ const OrderInfoContainer = styled.div`
       ${Roboto(1.6, 600, Color.GR400)};
       line-height: 19px;
       flex: 1;
+
       &:nth-of-type(2) {
-        flex: 2.9;
+        flex: 2.4;
+      }
+      &:nth-of-type(3) {
+        flex: 1.3;
+        padding-right: 2.5%;
       }
       &:last-child {
-        flex: 2;
+        flex: 1.2;
       }
     }
   }
 `;
 
 const ProductName = styled.div`
-  width: 425px;
+  width: 400px;
   & h1 {
     ${Roboto(1.6, 600, '#000')};
     margin: 0;
@@ -85,6 +90,26 @@ const ProductName = styled.div`
   }
 `;
 
+const Amount = styled.div`
+  ${Roboto(1.6, 400, '#000')};
+  width: 180px;
+  text-align: center;
+`;
+
+const OrderStatus = styled.div`
+  ${Roboto(1.5, 600, '#000')};
+  width: 130px;
+  text-align: center;
+
+  & button {
+    ${Roboto(1, 600, '#000')};
+    display: block;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1.5px solid ${Color.GR300};
+  }
+`;
+
 const MyOrderHistoryContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -94,14 +119,6 @@ const MyOrderHistoryContainer = styled.div`
   & img {
     width: 180px;
     height: 180px;
-  }
-
-  & span:not(:last-child) {
-    display: block;
-    width: 140px;
-  }
-  & .shipping {
-    padding-left: 10px;
   }
 `;
 
@@ -123,13 +140,10 @@ const Price = styled.div`
     ${Roboto(2.8, 600, Color.RD100)};
     line-height: 33px;
   }
-
-  & span {
-    ${Roboto(1.6, 600, Color.GY200)};
-    line-height: 19px;
-  }
 `;
 
 const Flex = styled.div`
   display: flex;
 `;
+
+const DivForEmptySpace = styled.div``;

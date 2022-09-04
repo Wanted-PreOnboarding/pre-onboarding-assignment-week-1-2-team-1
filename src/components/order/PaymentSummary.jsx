@@ -1,29 +1,33 @@
 import React from 'react';
 import { Color, Roboto } from '../../styles/common';
 import styled from '@emotion/styled';
+// import { css } from '@emotion/react';
 import priceSetting from '../../utils/priceSetting';
 
-const PaymentPrice = ({ title, price }) => {
+export const PaymentPrice = ({ title, price, emphasis }) => {
   return (
     <PriceChip>
       <span className="title">{title}</span>
-      <span className="price">{priceSetting(price)}원</span>
+      <span className={`price ${emphasis}`}>{priceSetting(price)}원</span>
     </PriceChip>
   );
 };
 
-function PaymentSummary() {
+function PaymentSummary({ fruit, volume }) {
   return (
     <Summary>
       <h1>결제요약</h1>
       <div className="container">
-        <PaymentPrice title="총 상품금액" price={30000} />
+        <PaymentPrice title="총 상품금액" price={fruit.price * volume} />
         <Operator>+</Operator>
-        <PaymentPrice title="총 할인금액" price={3400} />
+        <PaymentPrice title="총 할인금액" price={(fruit.price - fruit.salePrice) * volume} />
         <Operator>-</Operator>
-        <PaymentPrice title="배송비" price={3500} />
+        <PaymentPrice title="배송비" price={fruit.shippingPrice} />
         <Operator>=</Operator>
-        <PaymentPrice title="총 결제 예정금액" price={30100} />
+        <PaymentPrice
+          title="총 결제 예정금액"
+          price={fruit.salePrice * volume + fruit.shippingPrice}
+        />
       </div>
     </Summary>
   );
@@ -43,9 +47,13 @@ const PriceChip = styled.div`
   & .price {
     ${Roboto(2, 600, '#000')};
   }
+
+  & .price.emphasis {
+    ${Roboto(2, 800, Color.RD100)};
+  }
 `;
 
-const Summary = styled.section`
+export const Summary = styled.section`
   width: 100%;
   margin-bottom: 57px;
   & h1 {
@@ -59,7 +67,7 @@ const Summary = styled.section`
     padding: 35px 70px;
   }
 `;
-const Operator = styled.span`
+export const Operator = styled.span`
   display: inline;
   ${Roboto(2, 600, '#000')};
   line-height: 23px;

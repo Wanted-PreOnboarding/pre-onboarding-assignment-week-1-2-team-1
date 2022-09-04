@@ -5,7 +5,11 @@ import OrderInput from '../components/order/OrderInput';
 import PaymentSummary from '../components/order/PaymentSummary';
 import priceSetting from '../utils/priceSetting';
 import { Color, Roboto } from '../styles/common';
+import { useLocation, useNavigate, useParams } from 'react-router';
 const Order = () => {
+  const { id } = useParams();
+  const navigate = useNavigate('');
+
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
@@ -15,6 +19,9 @@ const Order = () => {
   const [address, setAddress] = useState('');
   const [detailedAddress, setDetailedAddress] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+
+  const { state } = useLocation();
+  const { fruit, volume } = state;
 
   const isDisabled =
     name &&
@@ -50,11 +57,27 @@ const Order = () => {
     주소 : ${address} \n
     상세주소 : ${detailedAddress} \n
     `);
+
+    navigate(`/fruit/${id}/payment/detail`, {
+      state: {
+        fruit,
+        volume,
+        name,
+        phoneNumber,
+        email,
+        recipient,
+        recipientPhoneNumber,
+        zipCode,
+        address,
+        detailedAddress,
+        isChecked,
+      },
+    });
   };
 
   return (
     <OrderPage>
-      <OrderInfo />
+      <OrderInfo fruit={fruit} volume={volume} />
       <BuyerInfoContainer>
         <article className="userInfo">
           <h1>주문자 정보</h1>
@@ -102,7 +125,7 @@ const Order = () => {
           </InpuForm>
         </article>
       </BuyerInfoContainer>
-      <PaymentSummary />
+      <PaymentSummary fruit={fruit} volume={volume} />
       <Button disabled={!isDisabled} onClick={paymentHandler}>
         총 {priceSetting(33900)}원 결제하기
       </Button>
