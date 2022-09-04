@@ -107,16 +107,8 @@ function List() {
         ))}
       </ChipMenu>
       <ProductCardContainer>
-        {productItems.map(({ id, img, isSale, name, price, salePrice, chip }) => (
-          <ProductCard
-            key={id}
-            id={id}
-            img={img}
-            isSale={isSale}
-            name={name}
-            price={price}
-            salePrice={salePrice}
-          />
+        {productItems.map(productItem => (
+          <ProductCard key={productItem.id} productItem={productItem} />
         ))}
       </ProductCardContainer>
       <Pagination>
