@@ -16,4 +16,8 @@ export const AppContainer = styled.div`
   * {
     box-sizing: border-box;
   }
+
+  @media screen and (max-width: 1440px) {
+    width: 100%;
+  }
 `;
