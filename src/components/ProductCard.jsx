@@ -14,6 +14,7 @@ const ProductCardContainer = styled.div`
     object-fit: cover;
   }
 `;
+const ImageWrapper = styled(Link)``;
 const ProductCardDescription = styled.div`
   height: 114px;
   padding: 0 1rem;
@@ -64,10 +65,10 @@ function ProductCard({ id, img, isSale, name, price, salePrice, chip }) {
 
   return (
     <ProductCardContainer>
-      <Link to={url}>
+      <ImageWrapper to={url}>
         {/* todo: 이후에 absolute로 sale, best,md badge를 추가하기 위해서 div로 감쌌음 */}
         <img src={img} alt={name} />
-      </Link>
+      </ImageWrapper>
       <ProductCardDescription>
         <Link to={url}>
           <h3>{name}</h3>
