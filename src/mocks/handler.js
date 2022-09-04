@@ -5,10 +5,14 @@ const fruits = [
     id: 1,
     img: 'https://cdn.imweb.me/thumbnail/20200715/53fa50226803f.jpg',
     name: '거창 오가네체리자두 3kg 한 상자',
-    price: 36000,
-    salePrice: 29000,
-    isSale: true,
-    chip: 'best',
+    price: 36000, // 정가
+    salePrice: 29000, //세일가
+    isSale: true, //세일 여부
+    salePercent: 10, //세일 비율(%)
+    shippingFlag: 0, //배송비 여부 0:무료배송, 1:조건부 배송, 2: 배송비 있음
+    shippingPrice: 3000, //2일때만 가격 붙이고 나머지는 null 처리
+    saleFlag: 1, //  0:판매중, 1: 현재 판매 기간이 아님, 2:SOLD OUT
+    chip: ['BEST', 'SALE', 'MD'], //사진 왼쪽 위 칩
   },
   {
     id: 2,
@@ -17,7 +21,11 @@ const fruits = [
     price: 120000,
     salePrice: 52000,
     isSale: true,
-    chip: 'best',
+    salePercent: 10,
+    shippingFlag: 0,
+    shippingPrice: 3000,
+    saleFlag: 2,
+    chip: ['BEST'],
   },
   {
     id: 3,
@@ -26,7 +34,11 @@ const fruits = [
     price: 40000,
     salePrice: 30000,
     isSale: true,
-    chip: 'best',
+    salePercent: 10,
+    shippingFlag: 0,
+    shippingPrice: 3000,
+    saleFlag: 0,
+    chip: ['BEST'],
   },
   {
     id: 4,
@@ -35,7 +47,11 @@ const fruits = [
     price: 15000,
     salePrice: 13300,
     isSale: true,
-    chip: 'best',
+    salePercent: 10,
+    shippingFlag: 0,
+    shippingPrice: 3000,
+    saleFlag: 0,
+    chip: ['BEST'],
   },
   {
     id: 5,
@@ -44,7 +60,11 @@ const fruits = [
     price: 60000,
     salePrice: 57000,
     isSale: true,
-    chip: 'best',
+    salePercent: 10,
+    shippingFlag: 0,
+    shippingPrice: 3000,
+    saleFlag: 0,
+    chip: ['BEST'],
   },
   {
     id: 6,
@@ -53,7 +73,11 @@ const fruits = [
     price: 36000,
     salePrice: 29000,
     isSale: true,
-    chip: 'best',
+    salePercent: 10,
+    shippingFlag: 0,
+    shippingPrice: 3000,
+    saleFlag: 0,
+    chip: ['BEST'],
   },
   {
     id: 7,
@@ -62,7 +86,11 @@ const fruits = [
     price: 50000,
     salePrice: 22500,
     isSale: true,
-    chip: 'best',
+    salePercent: 10,
+    shippingFlag: 0,
+    shippingPrice: 3000,
+    saleFlag: 0,
+    chip: ['BEST'],
   },
   {
     id: 8,
@@ -71,7 +99,11 @@ const fruits = [
     price: 60000,
     salePrice: 25000,
     isSale: true,
-    chip: 'best',
+    salePercent: 10,
+    shippingFlag: 0,
+    shippingPrice: 3000,
+    saleFlag: 0,
+    chip: ['BEST'],
   },
   {
     id: 9,
@@ -80,7 +112,11 @@ const fruits = [
     price: 16000,
     salePrice: 12500,
     isSale: true,
-    chip: 'best',
+    salePercent: 10,
+    shippingFlag: 0,
+    shippingPrice: 3000,
+    saleFlag: 0,
+    chip: ['BEST'],
   },
   {
     id: 10,
@@ -89,7 +125,11 @@ const fruits = [
     price: 60000,
     salePrice: 19000,
     isSale: true,
-    chip: 'best',
+    salePercent: 10,
+    shippingFlag: 0,
+    shippingPrice: 3000,
+    saleFlag: 0,
+    chip: ['BEST'],
   },
   {
     id: 11,
@@ -98,7 +138,11 @@ const fruits = [
     price: 70000,
     salePrice: 25000,
     isSale: true,
-    chip: 'best',
+    salePercent: 10,
+    shippingFlag: 0,
+    shippingPrice: 3000,
+    saleFlag: 0,
+    chip: ['best'],
   },
 ];
 

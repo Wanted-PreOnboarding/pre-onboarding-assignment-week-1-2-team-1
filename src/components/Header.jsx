@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Roboto } from '../styles/common';
-
+import { Color, Roboto } from '../styles/common';
 function Header() {
   return (
     <HeaderComponent>
@@ -19,11 +18,17 @@ export default Header;
 
 const HeaderComponent = styled.header`
   height: 81px;
+  background-color: #fff;
   display: flex;
   justify-content: space-between;
   padding: 10px 22px;
+  border-bottom: ${Color.GR300};
+  box-shadow: 0px 2px 2px rgba(74, 149, 54, 0.1);
+  z-index: 1;
 
   & nav {
+    display: flex;
+    align-items: center;
   }
 
   & img {

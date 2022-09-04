@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Color, Roboto } from '../../styles/common';
 // import axios from 'axios';
 import Modal from './AdminModal';
+import AdminItemList from './AdminItemList';
 
 function AdminPost() {
   // eslint-disable-next-line no-unused-vars
@@ -19,6 +20,8 @@ function AdminPost() {
 
       { modal === true ? <Modal /> : null}
 
+      <AdminItemList />
+
       <button onClick={onModal} className='modal-btn'>상품 등록하기</button>
     </AdminPostContainer>
   )
@@ -26,6 +29,7 @@ function AdminPost() {
 
 export default AdminPost;
 
+// style
 // 관리자 상품 등록 페이지 컨테이너
 const AdminPostContainer = styled.div`
   width: 1260px;
@@ -51,14 +55,5 @@ const AdminPostContainer = styled.div`
     cursor: pointer;
   }
 `
-// 상품 리스트 컨테이너
-// const Items = styled.div`
-//   width: 100%;
-// `
-// // 상품 리스트 한 줄
-// const Item = styled.div`
-//   width: 100%;
-//   height: 100px;
-//   margin: 10px;
-// `
+
 
