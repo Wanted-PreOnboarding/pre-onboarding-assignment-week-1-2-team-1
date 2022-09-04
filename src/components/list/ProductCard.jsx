@@ -83,20 +83,9 @@ const PriceAndDelivery = styled.div`
   }
 `;
 
-//? salesPercent가 반드시 필요할까
 function ProductCard({ productItem }) {
-  const {
-    id,
-    img,
-    chip,
-    name,
-    price,
-    saleFlag,
-    salePrice,
-    // salePercent,
-    shippingFlag,
-    shippingPrice,
-  } = productItem;
+  const { id, img, chip, name, price, saleFlag, salePrice, shippingFlag, shippingPrice } =
+    productItem;
 
   const discountPercentage = (100 - (salePrice / price) * 100).toFixed(0);
   const url = `/fruit/${id}`;
