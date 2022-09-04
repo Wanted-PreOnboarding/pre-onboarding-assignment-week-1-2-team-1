@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Color, Roboto } from '../../styles/common';
 import priceSetting from '../../utils/priceSetting';
 
-const OrderInfo = () => {
+const OrderInfo = ({ fruit, volume }) => {
   return (
     <OrderInfoContainer>
       <ul>
@@ -14,19 +14,16 @@ const OrderInfo = () => {
         <li>주문상태</li>
       </ul>
       <MyOrderHistoryContainer>
-        <img
-          src="https://cdn.imweb.me/thumbnail/20220610/57a69b42b7edf.jpg"
-          alt="내가 구입할 상품"
-        />
+        <img src={fruit.img} alt="내가 구입할 상품" />
         <ProductName className="product-name">
-          <h1>목감기에 좋은 건더기 없는 프리미엄 수제 착즙 유자청</h1>
+          <h1>{fruit.name}</h1>
           <Flex>
             <Chip>필수 선택</Chip> <span>유자청 480g(960g)/2개</span>
           </Flex>
         </ProductName>
         <Amount>2개</Amount>
         <Price style={{ textAlign: 'center' }}>
-          <h1>{priceSetting(30100)}원</h1>
+          <h1>{priceSetting(fruit.salePrice * volume + fruit.shippingPrice)}원</h1>
         </Price>
         <OrderStatus>
           <span>상품 준비중</span>
