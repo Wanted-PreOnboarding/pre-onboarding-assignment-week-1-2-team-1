@@ -1,11 +1,17 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Color, Roboto } from '../styles/common';
 function Header() {
+  const navigate = useNavigate();
+
   return (
     <HeaderComponent>
-      <img src={`${process.env.PUBLIC_URL}/imgs/프룻로고.jpg`} alt="메인로고" />
+      <img
+        src={`${process.env.PUBLIC_URL}/imgs/프룻로고.jpg`}
+        alt="메인로고"
+        onClick={() => navigate('/')}
+      />
       <nav>
         <Link to="/fruits">상품리스트</Link>
         <Link to="/admin?page=1">관리자 페이지</Link>
