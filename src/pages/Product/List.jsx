@@ -48,6 +48,10 @@ const ChipMenu = styled.section`
   justify-content: space-around;
   align-items: center;
 `;
+const ChipMenuButton = styled.span`
+  color: ${({ selected }) => (selected ? '#206B0C' : '#000000')};
+  font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
+`;
 const ProductCardContainer = styled.section`
   display: flex;
   justify-content: center;
@@ -68,14 +72,12 @@ const Pagination = styled.div`
     font-size: 1.5rem;
   }
 `;
-
 const StyledPrev = styled(MdNavigateBefore)`
   visibility: ${({ disabled }) => (disabled ? 'hidden' : 'visible')};
 `;
 const StyledNext = styled(MdNavigateNext)`
   visibility: ${({ disabled }) => (disabled ? 'hidden' : 'visible')};
 `;
-
 const PaginationButton = styled.span`
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -88,7 +90,7 @@ function List() {
   const [pagination, setPagination] = useState(0);
 
   const [onPage, setOnPage] = useState(1);
-  const [onChip, setOnChip] = useState('SALE');
+  const [onChip, setOnChip] = useState('BEST');
 
   const chipsMenus = ['SALE', 'BEST', 'MD', 'ALL'];
 
@@ -118,13 +120,14 @@ function List() {
   const pageSpans = [];
   for (let i = 0; i < pagination; i++) {
     pageSpans.push(
-      <PaginationButton isSelected={onPage === i + 1} onClick={onClickPage}>
+      <PaginationButton key={i} isSelected={onPage === i + 1} onClick={onClickPage}>
         {i + 1}
       </PaginationButton>
     );
   }
   const createHandleClickChipMenu = chip => () => {
     setOnChip(chip);
+    setOnPage(1);
   };
   const onClickPrevPage = () => {
     setOnPage(prevPage => (prevPage > 1 ? prevPage - 1 : prevPage));
@@ -146,10 +149,14 @@ function List() {
         </p>
       </Introduction>
       <ChipMenu>
-        {chipsMenus.map((chipMenu, idx) => (
-          <span key={idx} onClick={createHandleClickChipMenu(chipMenu)}>
-            {chipMenu}
-          </span>
+        {chipsMenus.map((chip, idx) => (
+          <ChipMenuButton
+            key={idx}
+            onClick={createHandleClickChipMenu(chip)}
+            selected={onChip === chip}
+          >
+            {chip}
+          </ChipMenuButton>
         ))}
       </ChipMenu>
       <ProductCardContainer>
@@ -167,4 +174,3 @@ function List() {
 }
 
 export default List;
-//todo : prev로 더이상 갈 수 없을 경우 아이콘을 흐리게 하는 효과 추가하기
