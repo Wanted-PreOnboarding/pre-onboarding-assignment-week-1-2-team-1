@@ -153,8 +153,8 @@ export const handlers = [
     const page = req.url.searchParams.get('page');
 
     const result = [];
-    for (let i = 0; i < fruits.length; i += 30) {
-      result.push(fruits.slice(i, i + 30));
+    for (let i = 0; i < fruits.length; i += 10) {
+      result.push(fruits.slice(i, i + 10));
     }
     const returnPageData = result[Number(page) - 1];
     return res(
