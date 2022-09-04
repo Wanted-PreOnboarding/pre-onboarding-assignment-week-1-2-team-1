@@ -58,7 +58,7 @@ function DetailInfo({ fruit, id }) {
         </ProductOption>
         <ProductOption>
           <span>배송비</span>
-          <span>무료</span>
+          <span>{fruit.shippingFlag === 2 ? fruit.shippingPrice : '무료'}</span>
         </ProductOption>
         <ProductOption>
           <span>수량</span>
@@ -70,7 +70,12 @@ function DetailInfo({ fruit, id }) {
         </ProductOption>
         <TotalPrice>
           <span>총 상품금액:</span>
-          <span>{priceSetting(volume * fruit.salePrice)}원</span>
+          <span>
+            {fruit.shippingFlag === 2
+              ? priceSetting(volume * fruit.salePrice + fruit.shippingPrice)
+              : priceSetting(volume * fruit.salePrice)}
+            원
+          </span>
         </TotalPrice>
         {fruit.saleFlag === 0 ? (
           <BuyButton onClick={onBuyProduct}>구매하기</BuyButton>
