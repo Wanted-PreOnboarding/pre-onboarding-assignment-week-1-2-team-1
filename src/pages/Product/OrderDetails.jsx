@@ -24,9 +24,6 @@ const OrderDetails = () => {
     isChecked,
   } = state;
 
-  //eslint-disable-next-line
-  console.log(state, name);
-
   const [toggle, setToggle] = useState(false);
   const { orderTime, orderNumber } = useMemo(() => orderNum(), []);
 

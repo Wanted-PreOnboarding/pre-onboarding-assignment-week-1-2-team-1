@@ -24,9 +24,9 @@ const OrderInfo = ({ fruit, volume }) => {
         <span className="shipping">{priceSetting(fruit.shippingPrice)}원</span>
         <span>{volume}</span>
         <Price>
-          <h1>{priceSetting(fruit.salePrice + fruit.shippingPrice)}원</h1>
+          <h1>{priceSetting(fruit.salePrice * volume + fruit.shippingPrice)}원</h1>
           <span>
-            {priceSetting(fruit.salePrice)}원 + {priceSetting(fruit.shippingPrice)}원
+            {priceSetting(fruit.salePrice * volume)}원 + {priceSetting(fruit.shippingPrice)}원
           </span>
         </Price>
       </MyOrderHistoryContainer>

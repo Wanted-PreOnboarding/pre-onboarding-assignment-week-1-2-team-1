@@ -21,7 +21,7 @@ const OrderInfo = ({ fruit, volume }) => {
             <Chip>필수 선택</Chip> <span>유자청 480g(960g)/2개</span>
           </Flex>
         </ProductName>
-        <Amount>2개</Amount>
+        <Amount>{volume}</Amount>
         <Price style={{ textAlign: 'center' }}>
           <h1>{priceSetting(fruit.salePrice * volume + fruit.shippingPrice)}원</h1>
         </Price>
