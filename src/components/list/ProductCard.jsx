@@ -2,14 +2,32 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 import Chip from './Chip';
+import setPrice from '../../utils/priceSetting';
 
 //todo: 리팩토링 과정을 통해서 style로 컴포넌트 옮기기
+//todo: 서버측에서 사용되지 않는 데이터를 제거하면 좋을 듯
 const ProductCardContainer = styled.div`
   width: 240px;
   height: 334px;
+  position: relative;
   display: flex;
   flex-direction: column;
   text-decoration: none;
+`;
+const NoSale = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 1rem;
+  word-break: keep-all;
+  text-align: center;
 `;
 const ImageWrapperLink = styled(Link)`
   position: relative;
@@ -49,6 +67,7 @@ const DiscountPercentageSpan = styled.span`
   font-size: 16px;
   color: #206b0c;
   font-weight: bold;
+  margin-right: 4px;
 `;
 const SalePriceSpan = styled.span`
   font-size: 18px;
@@ -68,19 +87,8 @@ const PriceAndDelivery = styled.div`
 `;
 
 function ProductCard({ productItem }) {
-  const {
-    id,
-    img,
-    chip,
-    name,
-    price,
-    // isSale,
-    // saleFlag,
-    salePrice,
-    // salePercent,
-    // shippingFlag,
-    // shippingPrice,
-  } = productItem;
+  const { id, img, chip, name, price, saleFlag, salePrice, shippingFlag, shippingPrice } =
+    productItem;
 
   const discountPercentage = (100 - (salePrice / price) * 100).toFixed(0);
   const url = `/fruit/${id}`;
@@ -88,8 +96,11 @@ function ProductCard({ productItem }) {
   //todo : chips 데이터 수정. sale은 chip으로 들어가서는 안될 것 같음. isSale과 겹치는 부분이 생긴다.
   return (
     <ProductCardContainer>
+      {saleFlag > 0 && (
+        <NoSale>{saleFlag === 1 ? '이 상품은 현재 판매기간이 아닙니다' : 'SOLD OUT'}</NoSale>
+      )}
       <ImageWrapperLink to={url}>
-        <div>{chip.length > 0 && chip.map(c => <Chip chip={c} />)}</div>
+        <div>{chip.length > 0 && chip.map((c, idx) => <Chip key={idx} chip={c} />)}</div>
         <img src={img} alt={name} />
       </ImageWrapperLink>
       <ProductCardDescription>
@@ -99,11 +110,11 @@ function ProductCard({ productItem }) {
         <div>
           <div>
             <DiscountPercentageSpan>{discountPercentage}%</DiscountPercentageSpan>
-            <SalePriceSpan>{salePrice}</SalePriceSpan>
+            <SalePriceSpan>{setPrice(salePrice)}</SalePriceSpan>
           </div>
           <PriceAndDelivery>
-            <span>{price}</span>
-            <span>무료배송</span>
+            <span>{setPrice(price)}</span>
+            <span>{shippingFlag === 0 ? '무료배송' : `배송료 ${shippingPrice}`}</span>
           </PriceAndDelivery>
         </div>
       </ProductCardDescription>

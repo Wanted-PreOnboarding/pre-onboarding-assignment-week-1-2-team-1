@@ -5,27 +5,34 @@ import OrderDetailsInfo from '../../components/orderDetails/OrderDetailsInfo';
 import { Color, Roboto } from '../../styles/common';
 import FinalPaymentSummary from '../../components/orderDetails/FinalPaymentSummary';
 import { orderNum } from '../../utils/OrderNums';
+import { useMemo } from 'react';
+import { useLocation } from 'react-router';
 
-const OrderDetails = ({
-  name,
-  phoneNumber,
-  email,
-  recipient,
-  recipientPhoneNumber,
-  zipCode,
-  address,
-  detailedAddress,
-  isChecked,
-}) => {
+const OrderDetails = () => {
+  const { state } = useLocation();
+  const {
+    fruit,
+    volume,
+    name,
+    phoneNumber,
+    email,
+    recipient,
+    recipientPhoneNumber,
+    zipCode,
+    address,
+    detailedAddress,
+    isChecked,
+  } = state;
+
   const [toggle, setToggle] = useState(false);
-  const { orderTime, orderNumber } = orderNum();
+  const { orderTime, orderNumber } = useMemo(() => orderNum(), []);
 
   return (
     <OrderPage>
-      <h1 style={{ paddingTop: '30px' }}>주문 상세 내역</h1>
+      <PageTitleText>주문 상세 내역</PageTitleText>
       {name ? (
         <>
-          <OrderDetailsInfo />
+          <OrderDetailsInfo fruit={fruit} volume={volume} />
           <ShowDetails>
             <OrderNum>
               <b>주문번호: </b>
@@ -77,7 +84,7 @@ const OrderDetails = ({
                   </InpuForm>
                 </article>
               </BuyerInfoContainer>
-              <FinalPaymentSummary />
+              <FinalPaymentSummary fruit={fruit} volume={volume} />
               <hr />
             </>
           )}
@@ -89,25 +96,24 @@ const OrderDetails = ({
   );
 };
 
-// 임의로 넣은 props 기본값입니다.
-OrderDetails.defaultProps = {
-  name: '김뚝딱',
-  phoneNumber: '010-1111-111',
-  email: '',
-  recipient: '김뚝딱씨',
-  recipientPhoneNumber: '010-1111-1112',
-  zipCode: '11240',
-  address: '서울시',
-  detailedAddress: '11동 3호',
-  isChecked: true,
-};
-
 export default OrderDetails;
 
 const OrderPage = styled.main`
   width: 1240px;
   margin: 0 auto;
   padding-bottom: 80vh;
+
+  @media (max-width: 1240px) {
+    width: 90%;
+  }
+`;
+
+const PageTitleText = styled.h1`
+  padding-top: 30px;
+
+  @media (max-width: 1240px) {
+    padding-left: 30px;
+  }
 `;
 
 const BuyerInfoContainer = styled.section`
@@ -124,6 +130,18 @@ const BuyerInfoContainer = styled.section`
 
   & article {
     box-sizing: border-box;
+  }
+
+  @media (max-width: 1240px) {
+    flex-direction: column;
+    align-items: center;
+
+    & .userInfo {
+      width: 100%;
+    }
+    & .shipInfo {
+      width: 100%;
+    }
   }
 `;
 const InpuForm = styled.div`
@@ -163,6 +181,11 @@ const ShowDetails = styled.div`
     &:hover {
       color: ${Color.GR300};
     }
+  }
+
+  @media (max-width: 1240px) {
+    width: 80%;
+    margin: auto;
   }
 `;
 

@@ -6,7 +6,7 @@ import List from './pages/Product/List';
 import { AppContainer } from './styles/reset';
 
 import Detail from './pages/Product/Detail';
-import Order from './pages/Order';
+import Order from './pages/Product/Order';
 import OrderDetails from './pages/Product/OrderDetails';
 import Admin from './pages/Admin/Admin';
 
@@ -15,6 +15,7 @@ function App() {
     <AppContainer className="App">
       <Header />
       <Routes>
+        <Route path="/" element={<List />} />
         <Route path="/fruit/:id" element={<Detail />} />
         <Route path="/fruit/:id/payment" element={<Order />} />
         <Route path="/fruit/:id/payment/detail" element={<OrderDetails />} />
