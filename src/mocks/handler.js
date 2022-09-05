@@ -55,6 +55,7 @@ export const handlers = [
       ...body,
       id: fruits.length - 1,
     });
+
     return res(ctx.status(201));
   }),
 

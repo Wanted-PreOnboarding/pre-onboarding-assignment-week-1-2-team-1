@@ -2,11 +2,15 @@ import styled from '@emotion/styled';
 
 import ProductItem from './ProductItem';
 
-import useProductList from '../../hooks/useProductList';
-
-function ProductList({ isReveal }) {
-  const { productList, setIsVisible } = useProductList();
-
+function ProductList({
+  isReveal,
+  productList,
+  setIsVisible,
+  getItems,
+  putItems,
+  showHandler,
+  show,
+}) {
   return (
     <Container>
       <ul>
@@ -19,14 +23,19 @@ function ProductList({ isReveal }) {
               name={product.name}
               price={product.price}
               salePrice={product.salePrice}
-              isSale={product.isSale}
-              isVisible={product.isVisible}
-              isReveal={isReveal}
-              isAdmin={true}
-              onClick={setIsVisible}
               chip={product.chip}
+              isSale={product.isSale}
+              shippingFlag={product.shippingFlag}
+              saleFlag={product.saleFlag}
+              isReveal={isReveal}
+              fetchList={getItems}
+              putList={putItems}
+              changeIsReveal={setIsVisible}
+              showHandler={showHandler}
+              show={show}
             />
           ))}
+        {!productList && <p>상품이 존재하지 않습니다.</p>}
       </ul>
     </Container>
   );

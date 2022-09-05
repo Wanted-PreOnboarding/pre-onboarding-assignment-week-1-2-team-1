@@ -1,10 +1,9 @@
-/* eslint-disable */
-
 import { useState, useEffect, useCallback } from 'react';
 import usePageList from './usePageList';
 
 const useProductList = () => {
   const [productList, setProductList] = useState();
+  const [revealEditList, setRevealEditList] = useState([]);
   const { curPage } = usePageList();
 
   const getItems = useCallback(async () => {
@@ -12,10 +11,15 @@ const useProductList = () => {
       method: 'GET',
     }).then(res => res.json());
 
-    setProductList(() => [...itemList.returnPageData]);
-
-    console.log(productList);
+    setProductList([...itemList.returnPageData]);
   }, [curPage]);
+
+  const putItems = async () => {
+    await fetch('/allfruit', {
+      method: 'PUT',
+      body: JSON.stringify(revealEditList),
+    });
+  };
 
   const setIsVisible = (id, isReveal) => {
     if (!isReveal) {
@@ -25,9 +29,11 @@ const useProductList = () => {
     setProductList(prevProductList => {
       let editedProductList = prevProductList.map(item => {
         if (item.id === id) {
+          const flag = (item.saleFlag + 1) % 3;
+          setRevealEditList(prev => [...prev, { id: item.id, saleFlag: flag }]);
           return {
             ...item,
-            isVisible: !item.isVisible,
+            saleFlag: flag,
           };
         }
         return {
@@ -43,7 +49,7 @@ const useProductList = () => {
     getItems();
   }, [curPage, getItems]);
 
-  return { productList, setIsVisible, getItems };
+  return { productList, setIsVisible, getItems, putItems, setRevealEditList };
 };
 
 export default useProductList;

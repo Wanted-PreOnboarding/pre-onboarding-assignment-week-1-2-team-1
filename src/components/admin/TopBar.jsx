@@ -5,11 +5,22 @@ import Button from '../common/Button';
 
 import { Color, Roboto } from '../../styles/common';
 
-function TopBar({ isReveal, onClick }) {
+function TopBar({ isReveal, setIsReveal, getItems, putItems, setRevealEditList }) {
+  const releaseHandler = async () => {
+    if (!isReveal) {
+      setIsReveal(prev => !prev);
+    } else {
+      await putItems();
+      getItems();
+      setIsReveal(prev => !prev);
+      setRevealEditList([]);
+    }
+  };
+
   return (
     <Container>
       <p>스토어 상품 목록 관리</p>
-      <Button height="40px" onClick={onClick}>
+      <Button height="40px" onClick={releaseHandler}>
         {isReveal ? '변경 저장' : '노출 변경'}
       </Button>
     </Container>

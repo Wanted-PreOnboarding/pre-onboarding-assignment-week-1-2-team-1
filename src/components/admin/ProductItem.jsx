@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router';
 
 import { ReactComponent as Check } from '../../assets/svg/icon-check.svg';
 import { ReactComponent as TrashCan } from '../../assets/svg/icon-trashcan.svg';
 import { ReactComponent as XMark } from '../../assets/svg/icon-x.svg';
 
 import { Color, Roboto } from '../../styles/common';
-import getChipBackground from '../../utils/background';
+import { getChipBackground, getReleaseBackground } from '../../utils/background';
 import priceSetting from '../../utils/priceSetting';
 import useProductItem from '../../hooks/useProductItem';
 
@@ -16,22 +17,30 @@ function ProductItem({
   name,
   price,
   salePrice,
+  chip,
   isSale,
-  isVisible,
+  shippingFlag,
+  saleFlag,
   isReveal,
-  onClick,
-  isAdmin,
+  fetchList,
+  putList,
+  changeIsReveal,
+  showHandler,
 }) {
   const { deleteProduct } = useProductItem();
-  const chip = ['BEST', 'SALE', 'MD'];
-  // const isEditMode = true;
+  const navigate = useNavigate();
 
   const changeHandler = () => {
-    onClick(id, isReveal);
+    changeIsReveal(id, isReveal);
   };
 
-  const removeHandler = () => {
-    deleteProduct(id);
+  const removeHandler = async () => {
+    const isDelete = window.confirm('삭제를 원하시면 확인 버튼을 눌러주세요.');
+    if (isDelete) {
+      await deleteProduct(id);
+      navigate('/admin?page=1', { replace: true });
+      fetchList();
+    }
   };
 
   return (
@@ -39,9 +48,10 @@ function ProductItem({
       <Container>
         <ImageContainer isReveal={isReveal} onClick={changeHandler}>
           {isReveal && (
-            <RevealBox isVisible={isVisible}>
-              {isVisible && <Check />}
-              {!isVisible && <XMark />}
+            <RevealBox bgColor={getReleaseBackground(saleFlag)}>
+              {saleFlag === 0 && <Check />}
+              {saleFlag === 1 && <XMark />}
+              {saleFlag === 2 && <XMark />}
             </RevealBox>
           )}
           <Image src={img} alt={name} />
@@ -65,7 +75,7 @@ function ProductItem({
             <span>30%</span> <span>{priceSetting(+salePrice)}원</span>
           </SalePriceGroup>
           <DeleveryGroup>무료배송</DeleveryGroup>
-          {isAdmin && <TrashCan onClick={removeHandler} />}
+          <TrashCan onClick={removeHandler} />
         </SideContainer>
       </Container>
     </li>
@@ -81,8 +91,8 @@ const Container = styled.div`
 `;
 
 const RevealBox = styled.div`
-  background-color: ${props => (props.isVisible ? Color.GR400 : Color.RD100)};
-  padding: 8px;
+  background-color: ${props => props.bgColor};
+  width: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
