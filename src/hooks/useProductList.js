@@ -6,12 +6,21 @@ const useProductList = () => {
   const [revealEditList, setRevealEditList] = useState([]);
   const { curPage } = usePageList();
 
-  const getItems = useCallback(async () => {
-    const itemList = await fetch(`/getfruits?page=${curPage}`, {
-      method: 'GET',
-    }).then(res => res.json());
+  /* eslint-disable */
 
-    setProductList([...itemList.returnPageData]);
+  const getItems = useCallback(async () => {
+    console.log(curPage);
+
+    await fetch(`/getfruits?page=${curPage}&chip=ALL`, {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setProductList(data.returnPageData);
+      });
+
+    // setProductList([...itemList.returnPageData]);
   }, [curPage]);
 
   const putItems = async () => {
