@@ -49,7 +49,6 @@ function AdminModal({ showHandler, getItems }) {
       setChip(chip.filter(el => el !== value));
     }
   };
-
   // 상품 등록 버튼
   const onUploadHandler = e => {
     e.preventDefault();
@@ -71,6 +70,10 @@ function AdminModal({ showHandler, getItems }) {
       .catch(error => {
         alert(error);
       });
+  };
+  // 상품 모달 창 닫기
+  const modalCloseHandler = () => {
+    showHandler(prev => !prev);
   };
   return (
     <AdminModalContainer>
@@ -151,9 +154,12 @@ function AdminModal({ showHandler, getItems }) {
             />
           </form>
         </form>
-        <button type="submit" onClick={onUploadHandler}>
-          등록하기
-        </button>
+        <form className='modal-button-form'>
+          <button type="submit" onClick={onUploadHandler}>
+            등록하기
+          </button>
+          <button onClick={modalCloseHandler}> 닫기 </button>
+        </form>
       </form>
     </AdminModalContainer>
   );
@@ -191,6 +197,12 @@ const AdminModalContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: right;
+  }
+  & form.modal-button-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
   }
   & label {
     margin-top: 10px;
