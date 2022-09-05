@@ -13,7 +13,7 @@ export const PaymentPrice = ({ title, price, emphasis }) => {
   );
 };
 
-function PaymentSummary({ info }) {
+function PaymentSummary({ info, volume }) {
   const hasSippingPrice = () => {
     const fruitData = { ...info };
     if (fruitData.shippingFlag === 2) {
@@ -25,16 +25,16 @@ function PaymentSummary({ info }) {
 
   const totalPayment = () => {
     const fruitData = { ...info };
-    return fruitData.price * 2 - fruitData.salePrice - hasSippingPrice();
+    return fruitData.salePrice * volume + hasSippingPrice();
   };
 
   return (
     <Summary>
       <h1>결제요약</h1>
       <div className="container">
-        <PaymentPrice title="총 상품금액" price={info.price} />
+        <PaymentPrice title="총 상품금액" price={info.price * volume} />
         <Operator>-</Operator>
-        <PaymentPrice title="총 할인금액" price={info.price - info.salePrice} />
+        <PaymentPrice title="총 할인금액" price={(info.price - info.salePrice) * volume} />
         <Operator>+</Operator>
         <PaymentPrice title="배송비" price={hasSippingPrice()} />
         <Operator>=</Operator>

@@ -35,13 +35,13 @@ const OrderInfo = ({ info, volume }) => {
   const totalPrice = () => {
     const fruitData = { ...info };
     if (fruitData.isSale && fruitData.shippingFlag === 2) {
-      return priceSetting(fruitData.salePrice + fruitData.shippingPrice);
+      return priceSetting(fruitData.salePrice * volume + fruitData.shippingPrice);
     } else if (fruitData.isSale && fruitData.shippingFlag === 0) {
-      return priceSetting(fruitData.salePrice);
+      return priceSetting(fruitData.salePrice * volume);
     } else if (!fruitData.isSale && fruitData.shippingFlag === 2) {
-      return priceSetting(fruitData.price + fruitData.shippingPrice);
+      return priceSetting(fruitData.price * volume + fruitData.shippingPrice);
     } else if (!fruitData.isSale && fruitData.shippingFlag === 0) {
-      return priceSetting(fruitData.price);
+      return priceSetting(fruitData.price * volume);
     }
   };
 
@@ -84,8 +84,10 @@ const OrderInfo = ({ info, volume }) => {
         <Price>
           <h1>{totalPrice()}원</h1>
           <span>
-            {info.isSale ? priceSetting(info.salePrice) : priceSetting(info.price)}원
-            {getShipping(info.shippingFlag, info.shippingPrice)}
+            {info.isSale
+              ? priceSetting(info.salePrice * volume)
+              : priceSetting(info.price * volume)}
+            원{getShipping(info.shippingFlag, info.shippingPrice)}
           </span>
         </Price>
       </MyOrderHistoryContainer>

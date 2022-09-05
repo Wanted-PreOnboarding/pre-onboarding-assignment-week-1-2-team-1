@@ -33,7 +33,8 @@ const Order = () => {
 
   const totalPayment = () => {
     const fruitData = { ...fruit };
-    return fruitData.price * 2 - fruitData.salePrice - hasSippingPrice();
+
+    return fruitData.salePrice * volume + hasSippingPrice();
   };
 
   const isDisabled =
@@ -141,7 +142,7 @@ const Order = () => {
           </InpuForm>
         </article>
       </BuyerInfoContainer>
-      <PaymentSummary info={fruit} />
+      <PaymentSummary info={fruit} volume={volume} />
       <Button disabled={!isDisabled} onClick={paymentHandler}>
         총 {priceSetting(totalPayment())}원 결제하기
       </Button>
