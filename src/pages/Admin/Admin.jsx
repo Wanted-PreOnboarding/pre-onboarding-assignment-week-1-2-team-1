@@ -15,11 +15,16 @@ function Admin() {
   const [isReveal, setIsReveal] = useState(false);
   const [show, setShow] = useState(false);
   const { productList, setIsVisible, getItems, putItems, setRevealEditList } = useProductList();
-
   const showHandler = () => {
     setShow(prev => !prev);
   };
-
+  // const outside = useRef();
+  // const modalClose = (e) => {
+  //   if (show && outside.current === e.target) {
+  //     setShow(prev => !prev);
+  //   }
+  // };
+// ref={outside} onClick={(e) => {modalClose(e)}}
   return (
     <AdminPage>
       <Modal show={show}>
@@ -44,6 +49,7 @@ function Admin() {
       <Button width="100%" onClick={showHandler}>
         +
       </Button>
+      
     </AdminPage>
   );
 }
