@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import Chip from '../Chip';
+
+import Chip from '../list/Chip';
+
 import priceSetting from '../../utils/priceSetting';
 import { Roboto, Color } from '../../styles/common';
 
@@ -15,7 +17,9 @@ function DetailInfo({ fruit, id }) {
 
   const onBuyProduct = () => {
     navigate(`/fruit/${id}/payment`, {
-      state: { fruit, volume },
+
+      state: { fruit, volume, id },
+
     });
   };
 
@@ -33,7 +37,9 @@ function DetailInfo({ fruit, id }) {
       <BuyComponents>
         <ChipContainer>
           {fruit.chip.map(chip => (
-            <Chip chip={chip} />
+
+            <Chip key={chip} chip={chip} />
+
           ))}
         </ChipContainer>
         <ProductTitle>
@@ -174,7 +180,9 @@ const ProductOption = styled.div`
     margin-right: 9.11px;
   }
 
-  span:nth-child(2) {
+
+  span:nth-of-type(2) {
+
     ${Roboto(1.4, 600, Color.GY200)}
     line-height: 24.41px;
   }
@@ -211,7 +219,9 @@ const TotalPrice = styled.div`
     margin-right: 9.11px;
   }
 
-  span:nth-child(2) {
+
+  span:nth-of-type(2) {
+
     ${Roboto(3.343, 600, Color.GR300)}
     line-height: 39.17px;
   }

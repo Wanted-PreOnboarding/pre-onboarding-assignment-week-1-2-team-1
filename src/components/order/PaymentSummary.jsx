@@ -13,18 +13,32 @@ export const PaymentPrice = ({ title, price, emphasis }) => {
   );
 };
 
-function PaymentSummary() {
+function PaymentSummary({ info, volume }) {
+  const hasSippingPrice = () => {
+    const fruitData = { ...info };
+    if (fruitData.shippingFlag === 2) {
+      return fruitData.shippingPrice;
+    } else {
+      return 0;
+    }
+  };
+
+  const totalPayment = () => {
+    const fruitData = { ...info };
+    return fruitData.salePrice * volume + hasSippingPrice();
+  };
+
   return (
     <Summary>
       <h1>결제요약</h1>
       <div className="container">
-        <PaymentPrice title="총 상품금액" price={30000} />
-        <Operator>+</Operator>
-        <PaymentPrice title="총 할인금액" price={3400} />
+        <PaymentPrice title="총 상품금액" price={info.price * volume} />
         <Operator>-</Operator>
-        <PaymentPrice title="배송비" price={3500} />
+        <PaymentPrice title="총 할인금액" price={(info.price - info.salePrice) * volume} />
+        <Operator>+</Operator>
+        <PaymentPrice title="배송비" price={hasSippingPrice()} />
         <Operator>=</Operator>
-        <PaymentPrice title="총 결제 예정금액" price={30100} />
+        <PaymentPrice title="총 결제 예정금액" price={totalPayment()} />
       </div>
     </Summary>
   );
@@ -51,6 +65,17 @@ const PriceChip = styled.div`
 `;
 
 export const Summary = styled.section`
+  @media (max-width: 1240px) {
+    width: 100% !important;
+    margin: auto;
+    margin-bottom: 57px;
+
+    & .container {
+      position: relative;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
   width: 100%;
   margin-bottom: 57px;
   & h1 {
