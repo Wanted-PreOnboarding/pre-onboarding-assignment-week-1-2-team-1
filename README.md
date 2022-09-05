@@ -20,7 +20,7 @@
 
 ## 1. 프로젝트 Config
 
-- #### [데모페이지입니다!](https://wanted-pre-onboarding-fe-6-1-2-i6kdpthgh-preonboardfe1.vercel.app/)
+- #### [데모페이지입니다!](https://wanted-pre-onboarding-fe-6-1-2-two.vercel.app/)
 
 - #### [저희팀 코딩 컨벤션 노션주소입니다!](https://instinctive-moustache-aba.notion.site/WPO-FE-6-1-Coding-Convention-6a0123a0196343ea88c8434a3c157812#d00f53fad5c545a4b1e2aba7f6c62f31)
 
