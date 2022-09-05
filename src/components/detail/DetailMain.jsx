@@ -71,14 +71,18 @@ const DetailImg = styled.img`
 `;
 
 const ReviewOrQna = styled.div`
+
   div:first-of-type {
+
     height: 37px;
     ${Roboto(1.8, 600, Color.GR400)}
     line-height: 21px;
     border-bottom: 1px solid ${Color.GY100};
   }
 
+
   div:last-of-type {
+
     height: 250px;
     text-align: center;
     ${Roboto(2.4, 600, Color.GY100)}
