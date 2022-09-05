@@ -55,6 +55,7 @@ export const handlers = [
       ...body,
       id: fruits.length - 1,
     });
+
     return res(ctx.status(201));
   }),
 
@@ -67,6 +68,21 @@ export const handlers = [
       1,
       body
     );
+    return res(ctx.status(201));
+  }),
+
+  //상품 노출 수정
+  rest.put('/allfruit', (req, res, ctx) => {
+    const body = req.body;
+    const parsedBody = JSON.parse(body);
+    parsedBody.map(item => {
+      fruits.splice(
+        fruits.findIndex(f => f.id === item.id),
+        1,
+        { ...fruits[fruits.findIndex(f => f.id === item.id)], saleFlag: item.saleFlag }
+      );
+    });
+
     return res(ctx.status(201));
   }),
 

@@ -6,7 +6,6 @@ import { ReactComponent as ArrowLeft } from '../../assets/svg/icon-arrow-left.sv
 import { ReactComponent as ArrowRight } from '../../assets/svg/icon-arrow-right.svg';
 
 import usePageList from '../../hooks/usePageList';
-// import { Color } from '../../styles/common';
 
 function Pagination() {
   const { pageList, curPage } = usePageList();

@@ -17,7 +17,7 @@ const usePageList = () => {
       pageNumbers.push(i + 1);
     }
 
-    setPageList(() => pageNumbers);
+    setPageList(pageNumbers);
   };
 
   useEffect(() => {

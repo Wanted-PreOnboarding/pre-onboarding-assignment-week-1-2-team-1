@@ -6,8 +6,16 @@ const matchedChipColor = {
   MD: `${Color.GR300}`,
 };
 
-function getChipBackground(chipName) {
+const matchedReleaseColor = {
+  0: `${Color.GR300}`,
+  1: `${Color.RD100}`,
+  2: `${Color.PR}`,
+};
+
+export function getChipBackground(chipName) {
   return matchedChipColor[chipName];
 }
 
-export default getChipBackground;
+export function getReleaseBackground(relaseNumber) {
+  return matchedReleaseColor[relaseNumber];
+}
