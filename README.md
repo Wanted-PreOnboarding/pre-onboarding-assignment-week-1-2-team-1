@@ -20,7 +20,7 @@
 
 ## 1. 프로젝트 Config
 
-- #### 데모페이지 url이 들어갈 자리입니다. (저희는 vercel로 했습니다. 블라블라)
+- #### [데모페이지입니다!](https://wanted-pre-onboarding-fe-6-1-2-i6kdpthgh-preonboardfe1.vercel.app/)
 
 - #### [저희팀 코딩 컨벤션 노션주소입니다!](https://instinctive-moustache-aba.notion.site/WPO-FE-6-1-Coding-Convention-6a0123a0196343ea88c8434a3c157812#d00f53fad5c545a4b1e2aba7f6c62f31)
 
@@ -29,7 +29,7 @@
 | 강민규     | 백승전        | 류웅선     | 윤여건    | 김정수   | 최홍규     |
 | ---------- | ------------- | ---------- | --------- | -------- | ---------- |
 | kagrin97   | BaikSeungJeon | unsnruu    | kunnyCode | sunpl13  | gomgun-lab |
-| 상세페이지 |    상품등록      | 상품리스트 | 주문내역  | 상품주문 | 상품관리   |
+| 상세페이지 |    상품등록      | 상품리스트 | 주문내역,피그마  | 상품주문 | 상품관리   |
 
 ## 2. 설치, 환경설정, 실행방법
 
