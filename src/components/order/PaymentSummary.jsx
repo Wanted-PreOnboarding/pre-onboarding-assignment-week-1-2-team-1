@@ -1,8 +1,8 @@
 import React from 'react';
 import { Color, Roboto } from '../../styles/common';
 import styled from '@emotion/styled';
-// import { css } from '@emotion/react';
 import priceSetting from '../../utils/priceSetting';
+import { hasShppingPrice } from '../../utils/hasShippingPrice';
 
 export const PaymentPrice = ({ title, price, emphasis }) => {
   return (
@@ -14,18 +14,11 @@ export const PaymentPrice = ({ title, price, emphasis }) => {
 };
 
 function PaymentSummary({ info, volume }) {
-  const hasSippingPrice = () => {
-    const fruitData = { ...info };
-    if (fruitData.shippingFlag === 2) {
-      return fruitData.shippingPrice;
-    } else {
-      return 0;
-    }
-  };
+  const hasSippingPrice = hasShppingPrice(info);
 
   const totalPayment = () => {
     const fruitData = { ...info };
-    return fruitData.salePrice * volume + hasSippingPrice();
+    return fruitData.salePrice * volume + hasSippingPrice;
   };
 
   return (
@@ -36,9 +29,12 @@ function PaymentSummary({ info, volume }) {
         <Operator>-</Operator>
         <PaymentPrice title="총 할인금액" price={(info.price - info.salePrice) * volume} />
         <Operator>+</Operator>
-        <PaymentPrice title="배송비" price={hasSippingPrice()} />
+        <PaymentPrice title="배송비" price={hasSippingPrice} />
         <Operator>=</Operator>
-        <PaymentPrice title="총 결제 예정금액" price={totalPayment()} />
+        <PaymentPrice
+          title="총 결제 예정금액"
+          price={totalPayment(info.salePrice * volume + info.shippingPrice)}
+        />
       </div>
     </Summary>
   );

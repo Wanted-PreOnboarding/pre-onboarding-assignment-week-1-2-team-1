@@ -2,8 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Color, Roboto } from '../../styles/common';
 import priceSetting from '../../utils/priceSetting';
+import { hasShppingPrice } from '../../utils/hasShippingPrice';
 
 const OrderInfo = ({ fruit, volume }) => {
+  const hasSippingPrice = hasShppingPrice(fruit);
+
   return (
     <OrderInfoContainer>
       <ul>
@@ -23,14 +26,14 @@ const OrderInfo = ({ fruit, volume }) => {
             </Flex>
             <Amount className="media-volume">수량: {volume}개</Amount>
             <Price className="media-price">
-              <h1>{priceSetting(fruit.salePrice * volume + fruit.shippingPrice)}원</h1>
+              <h1>{priceSetting(fruit.salePrice * volume + hasSippingPrice)}원</h1>
             </Price>
           </ProductName>
           <Amount className="volume" align="center">
             {volume}개
           </Amount>
           <Price className="price" style={{ textAlign: 'center' }}>
-            <h1>{priceSetting(fruit.salePrice * volume + fruit.shippingPrice)}원</h1>
+            <h1>{priceSetting(fruit.salePrice * volume + hasSippingPrice)}원</h1>
           </Price>
           <OrderStatus>
             <span>상품 준비중</span>
