@@ -1,4 +1,6 @@
-# 🌳 프루떼-오늘도프룻해! 목차
+# 🌳 프루떼-오늘도프룻해!
+
+## 목차
 
 - [1. 프로젝트 Config](#1-프로젝트-config)
   - 데모페이지
@@ -77,7 +79,7 @@
 - ### msw
   설명칸
 - ### @emotion
-  설명칸
+  emotion은 keyframe을 제공합니다. 따라서 모바일 화면에 대응하기 용이할 것 같다는 이유로 선정하였습니다.
 
 ## 5. 폴더 구조
 
@@ -95,7 +97,64 @@
 
 <details>
 <summary>🎄 폴더 tree 접기/펼치기</summary>
-<div markdown="1">
-트리가 들어갈 자리입니다.
-</div>
+<pre>
+├── App.js
+├── assets
+│   └── svg
+│       ├── icon-arrow-left.svg
+│       ├── icon-arrow-right.svg
+│       ├── icon-check.svg
+│       ├── icon-trashcan.svg
+│       └── icon-x.svg
+├── components
+│   ├── Footer.jsx
+│   ├── Header.jsx
+│   ├── TestMocking.jsx
+│   ├── admin
+│   │   ├── Pagination.jsx
+│   │   ├── ProductItem.jsx
+│   │   ├── ProductList.jsx
+│   │   └── TopBar.jsx
+│   ├── common
+│   │   └── Button.jsx
+│   ├── detail
+│   │   ├── DetailInfo.jsx
+│   │   └── DetailMain.jsx
+│   ├── list
+│   │   ├── Chip.jsx
+│   │   └── ProductCard.jsx
+│   ├── order
+│   │   ├── OrderInfo.jsx
+│   │   ├── OrderInput.jsx
+│   │   └── PaymentSummary.jsx
+│   └── orderDetails
+│       ├── FinalPaymentSummary.jsx
+│       └── OrderDetailsInfo.jsx
+├── hooks
+│   ├── usePageList.js
+│   ├── useProductItem.js
+│   └── useProductList.js
+├── index.css
+├── index.js
+├── mocks
+│   ├── browser.js
+│   ├── db.js
+│   └── handler.js
+├── pages
+│   ├── Admin
+│   │   └── Admin.jsx
+│   └── Product
+│       ├── Detail.jsx
+│       ├── List.jsx
+│       ├── Order.jsx
+│       └── OrderDetails.jsx
+├── setupTests.js
+├── styles
+│   ├── common.js
+│   └── reset.jsx
+└── utils
+    ├── OrderNums.js
+    ├── background.js
+    └── priceSetting.js
+</pre>
 </details>
